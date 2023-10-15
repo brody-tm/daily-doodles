@@ -23,7 +23,25 @@ canvas {
     right: 0;
 }
 
+#toolsLayout{
+    display: block;
+    width: 100px;
+    height: 550px;
+    position: relative;
+    bottom: 70px;
+    right: 50px;
+}
+
 input[type="color"] {
     width: 80px;
     height: 40px;
+}
+
+#download {
+    background-color:  #b1b1b1;
+    font-size: 11px;
+    width: 100px;
+    height: 17px;
+    position: relative;
+    margin: 10px 0px;
 }
