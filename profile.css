@@ -1,3 +1,70 @@
 .profilebutton{
     height: 75px;
 }
+#profile{
+    margin-top: 4cm;
+    margin-left: 4px;
+    display: flex;
+    width: 15cm;
+}
+.btn{
+    border: 0cap;
+    background-color: lightgray;
+    padding:14px 28px;
+    font-size: 11px;
+    cursor: pointer;
+    display:inline-block;
+    width: fit-content;
+    height: 12px;
+}
+ul{
+    list-style-type: none;
+}
+.column{
+ float: left;
+ height: 100%;
+ border: solid black;
+ 
+}
+#column1{
+    background-color: lightslategray;
+    width: 24%;
+    height: 100%;
+    
+}
+#column3{
+    width: 50%;
+    align-content: center;
+    height: 100%;
+    overflow: scroll;
+}
+#column3{
+    width: 24%;
+}
+.h1{
+    font-size: large;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
+li{
+    margin: 10px;
+}
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.h3{
+    justify-content: center;
+}
+.center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 2px;
+    border-style: ridge;
+}
