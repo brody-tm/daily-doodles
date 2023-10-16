@@ -21,21 +21,21 @@ ul{
     list-style-type: none;
 }
 .column{
- float: left;
- height: 100%;
- border: solid black;
- 
+ display:flex;
+ flex-direction: column;
+ padding: 20px;
 }
 #column1{
     background-color: lightslategray;
     width: 24%;
-    height: 100%;
-    
+}
+#column2{
+   border-left: solid black;
+   border-right: solid black;
 }
 #column3{
     width: 50%;
     align-content: center;
-    height: 100%;
     overflow: scroll;
 }
 #column3{
@@ -53,8 +53,8 @@ li{
 }
 .container{
     display: flex;
-    flex-direction: row;
     justify-content: center;
+    border: solid black;
 }
 .h3{
     justify-content: center;
@@ -67,4 +67,8 @@ li{
     margin-bottom: 5px;
     border: 2px;
     border-style: ridge;
+}
+
+.header{
+   text-align: center;
 }
