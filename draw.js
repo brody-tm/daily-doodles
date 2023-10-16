@@ -10,6 +10,8 @@
   var undoStack = []; //Stack holding past edits
   var currentLine = []; //Array to store the line being drawn
   var currentLayer = null; // The current drawing layer
+  var canvasHistory = []; // Array stores canvas history
+  var linePropsHist = []; //Stores line properties
 
   // Event listeners to handle mouse and touch events
   canvas.addEventListener('mousedown', startDrawing);
@@ -31,6 +33,7 @@
         segments: []
       };
       currentLayer.segments.push([lastX, lastY]);
+      saveCanvasState();
   }
  
   // Function to draw on the canvas
@@ -57,6 +60,7 @@
       isDrawing = false;
       // Store the current layer in the undo stack when drawing is done
       undoStack.push(currentLayer);
+      saveCanvasState();
   }
 
   // Function to get mouse position on the canvas
@@ -101,22 +105,43 @@ clearButton.addEventListener('click', function () {
  });
 // Event listener for the "Undo" button click
 undoButton.addEventListener('click', function () {
-    if (undoStack.length > 0) {
-        // Remove the most recently drawn layer from the stack
-        undoStack.pop();
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (canvasHistory.length > 0) {
+        canvasHistory.pop(); // Remove the last canvas state
+        if (canvasHistory.length > 0) {
+            var lastCanvasState = canvasHistory[canvasHistory.length - 1];
+            var lastLineProperties = linePropsHist[linePropsHist.length - 1];
 
-        // Redraw the remaining layers in the undo stack
-        undoStack.forEach(function (layer) {
-            ctx.strokeStyle = colorPicker.value;
-            ctx.lineWidth = layer.lineWidth;
-            ctx.lineCap = 'round';
-            ctx.beginPath();
-            ctx.moveTo(layer.segments[0][0], layer.segments[0][1]);
-            for (var i = 1; i < layer.segments.length; i++) {
-                ctx.lineTo(layer.segments[i][0], layer.segments[i][1]);
-            }
-            ctx.stroke();
-        });
+            var img = new Image();
+            img.src = lastCanvasState;
+            img.onload = function () {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0);
+                // Restore the line properties
+                ctx.lineWidth = lastLineProperties.lineWidth;
+                ctx.strokeStyle = lastLineProperties.strokeStyle;
+                ctx.lineCap = lastLineProperties.lineCap;
+            };
+
+            // Remove the last line properties
+            linePropsHist.pop();
+        } else {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
     }
 });
+// Function to save the current canvas state and line properties
+function saveCanvasState() {
+    var canvasState = canvas.toDataURL();
+    
+    // Only save the canvas state if it's different from the previous one
+    if (canvasHistory.length === 0 || canvasHistory[canvasHistory.length - 1] !== canvasState) {
+        canvasHistory.push(canvasState);
+        
+        var lineProperties = {
+            lineWidth: lineWidth,
+            strokeStyle: ctx.strokeStyle,
+            lineCap: ctx.lineCap
+        };
+        linePropertiesHistory.push(lineProperties);
+    }
+}
