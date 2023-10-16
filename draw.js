@@ -99,10 +99,16 @@
 clearButton.addEventListener('click', function () {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 });
+
+var lineWidthDisplay = document.getElementById('lineWidthDisplay');
+lineWidthDisplay.textContent = lineWidth; // Initialize the display with the initial value
+
  // Event listener for the slider input
  lineWidthSlider.addEventListener('input', function () {
     lineWidth = parseInt(lineWidthSlider.value);
+    lineWidthDisplay.textContent = lineWidth;
  });
+
 // Event listener for the "Undo" button click
 undoButton.addEventListener('click', function () {
     if (canvasHistory.length > 0) {
