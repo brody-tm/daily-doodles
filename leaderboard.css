@@ -1,3 +1,54 @@
 .leaderboardbutton{
     height: 75px;
 }
+
+.title{
+    margin-top: 30px;
+    font-size: 50px;
+    text-align: center;
+}
+
+
+.options{
+    display:flex;
+    gap:30px;
+    justify-content: center;
+}
+
+.friendSide,.globalSide{
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.PostsContainer{
+    display:flex;
+    padding: 5px;
+    justify-content: space-around;
+    margin-top: 40px;
+}
+
+.post{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header{
+    border: 1px;
+    border-style: solid;
+    display:flex;
+    border-radius: 5px;
+    padding:5px;
+    gap: 6px;
+    width: 250px;
+    height: 50px;
+}
+
+.trophy{
+ font-size: 30px;
+}
+
+.drawing{
+    border: 1px;
+    border-style: solid;
+}
