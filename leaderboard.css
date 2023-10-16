@@ -22,15 +22,18 @@
 
 .PostsContainer{
     display:flex;
+    flex-direction: row;
     padding: 5px;
-    justify-content: space-around;
-    margin-top: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .post{
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     align-items: center;
+    width: min-content;
+    padding: 50px;
 }
 
 .header{
