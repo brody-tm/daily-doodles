@@ -54,7 +54,7 @@ li{
 .container{
     display: flex;
     justify-content: center;
-    border: solid black;
+
 }
 .h3{
     justify-content: center;

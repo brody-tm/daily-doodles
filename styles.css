@@ -4,6 +4,7 @@ body{
 
 .nav{
     background-color: rgb(182, 179, 175);
+    border-bottom: solid black;
 }
 
 .drawingbutton,.explorerbutton,.profilebutton,.leaderboardbutton{
