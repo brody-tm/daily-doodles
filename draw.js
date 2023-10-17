@@ -133,6 +133,8 @@ undoButton.addEventListener('click', function () {
         } else {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, 0, 1342, 853);
     }
 });
 // Function to save the current canvas state and line properties
