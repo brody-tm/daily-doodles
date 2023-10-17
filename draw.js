@@ -133,6 +133,7 @@ undoButton.addEventListener('click', function () {
         } else {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
+        //Resets default background to white, allows save to be visible
         ctx.fillStyle = 'white';
         ctx.fillRect(0, 0, 1342, 853);
     }
