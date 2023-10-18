@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Drawing Page</title>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="draw.css">
+        <script src = "draw.js" defer> </script>
+    </head>
+
+    <body>
+
+    <div class="nav"> 
+        <img src="Logo.png"
+                    width="80"
+                    height="auto">
+
+        <div class="buttoncontainer">    
+
+        <a href="draw.html" class="drawingPage">
+                <button class="drawingbutton">🖍</button>
+            </a>
+
+            <a href="explorerHeating.html" class="explorerPage">
+                <button class="explorerbutton">🔍</button>
+            </a>
+
+            <a href="profile.html" class="profilePage">
+                <button class="profilebutton">👤</button>
+            </a>
+
+            <a href="leaderboard.html" class="leaderboardPage">
+                <button class="leaderboardbutton">🏆</button>
+                </a>
+        </div>  
+     </div>
+     
+     <div class="drawingContainer">
+        <div class="topHalf">
+            <ul class="drawingOptions">
+                <li></li> <label for="colorPicker">Choose Color:</label></li>
+                <li><input type="color" id="colorPicker" value="#000"></li>
+                <li><label for="lineWidthSlider">Line Width:</label></li>
+                <li> <input type="range" id="lineWidthSlider" min="1" max="30" value="1">
+                    <span id="lineWidthDisplay">1</span>
+                </li>
+                <li>  <button id="clearButton">Clear</button></li>
+                <li> <button id="undoButton">Undo</button></li>
+                <li> <button id="download"> Save Image</button></li>
+            </ul>
+        </div>
+        <div class="canvas-container">
+            <canvas id="myCanvas" width="800" height="550"></canvas> 
+         </div>
+    </div>
+    </body>
+</html>

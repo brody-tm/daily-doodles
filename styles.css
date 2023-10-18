@@ -12,9 +12,10 @@ body{
     height: 70px;
     font-size: 50px;  
     border-radius: 5px;
+    align-self: center;
 }
 
-.drawingbutton,.explorerbutton,.profilebutton,.leaderboardbutton:hover{
+.drawingbutton:hover,.explorerbutton:hover,.profilebutton:hover,.leaderboardbutton:hover{
     box-shadow: 0 4px #898c8d;
     cursor:grab;
 }

@@ -6,15 +6,16 @@ const userMap = new Map();
 
 // TODO make sure this is the right way to do this
 function domLoaded() {
-   document.querySelector("#createUserButton").addEventListener("click", createUserHandler)
-   document.querySelector("#loginUserButton").addEventListener("click", loginUserHandler)
-   document.querySelector("#resetPasswdButton").addEventListener("click", resetPasswdHandler)
+   document.querySelector("#signupButton").addEventListener("click", signupHandler)
+   document.querySelector("#loginButton").addEventListener("click", loginHandler)
+   document.querySelector("#forgotPasswdButton").addEventListener("click", resetPasswdHandler)
 }
 
-function createUserHandler(){
+function signupHandler(){
+    console.log("here");
     // parse input
-    let emailAddrInput = document.querySelector("#createUserInput");
-    let passwdInput = document.querySelector("#createPasswdInput");
+    let emailAddrInput = document.querySelector("#signupEmailInput");
+    let passwdInput = document.querySelector("#signupPasswdInput");
 
     let emailAddr = emailAddrInput.value;
     let passwd= passwdInput.value;
@@ -41,12 +42,12 @@ function createUserHandler(){
         return;
     }
 
-    createNewUser(emailAddr, passwd);
+    signupUser(emailAddr, passwd);
 }
 
-function loginUserHandler(){
+function loginHandler(){
     // parse user input
-    let emailAddrInput = document.querySelector("#loginUserInput");
+    let emailAddrInput = document.querySelector("#loginEmailInput");
     let passwdInput = document.querySelector("#loginPasswdInput");
 
     let emailAddr = emailAddrInput.value;
@@ -62,6 +63,7 @@ function loginUserHandler(){
         return;
     }
 
+    console.log("validated user");
     // TODO: admin check logic
     initiateLogin(emailAddr, passwd);
 }
@@ -85,28 +87,28 @@ function validPasswd(passwd){
 }
 
 // TODO: change to interact with backend
-function createNewUser(emailAddr, passwd){
+function signupUser(emailAddr, passwd){
     userMap.set(emailAddr, passwd);
 
-    alert("New user created succesfully!")
+    alert("New account created succesfully!")
 
     return
 }
 
 // TODO: change to interact with backend
 function userExists(emailAddr, passwd){
-    let storedPasswd = userMap.get(emailAddr);
-
-    // either the user email was not found in the map, or the given password did not match
-    if (storedPasswd === undefined || storedPasswd != passwd) {
-        return false
+    if (userMap.has(emailAddr)){
+        // true if entered password matches stored password; false otherwise
+        return passwd === userMap.get(emailAddr);
     }
 
-    else {
-        return true
+    // email address not found in the map; user doesn't exist
+    else{
+        return false;
     }
 }
 
 function initiateLogin(emailAddr, passwd){
-    alert("Successful Login!");
+    console.log("trying to log in");
+    window.location.href="draw.html";
 }
