@@ -80,7 +80,7 @@
   ctx.fillRect(0, 0, 1342, 853);
   document.getElementById('download').addEventListener('click', 
       function(e) {
-        let canvasUrl = canvas.toDataURL("image/jpeg", 0.5);
+        let canvasUrl = canvas.toDataURL("image/png", 0.5);
         console.log(canvasUrl);
         const createEl = document.createElement('a');
         createEl.href = canvasUrl;
@@ -133,6 +133,7 @@ undoButton.addEventListener('click', function () {
         } else {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
+        //Resets default background to white, allows save to be visible
         ctx.fillStyle = 'white';
         ctx.fillRect(0, 0, 1342, 853);
     }
