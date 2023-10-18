@@ -14,7 +14,7 @@
 canvas {
     border: 3px solid #000;
     width: 800px;
-    height: 550px;
+    height: 500px;
 }
 
 #toolsLayout{
@@ -29,7 +29,36 @@ canvas {
 input[type="color"] {
     width: 80px;
     height: 40px;
+    border: none;
+    border-radius: 25px;
+    padding: 0px;
+    margin: 10px;
+    transition: 0.3s;
 }
+input[type="color"]:hover{
+    filter: drop-shadow(10px 5px gray);
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+	border: none;
+    border-radius: 10px;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+    height: 10px;
+    border-radius: 25px;
+    background: black;
+  }
+  
+  input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+  margin-top: -3px;
+  background-color: #b1b1b1;
+  }
+  
+
 #download {
     background-color:  #b1b1b1;
     font-size: 11px;
@@ -39,23 +68,55 @@ input[type="color"] {
 
 
 .drawingOptions{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    border: 1px solid #000;
-    padding: 20px;
-    align-items: center;
     list-style: none;
-    justify-content: center;
+    background-color: rgb(210, 210, 231);
+    filter: drop-shadow(10px 5px gray);
+    display: flex;
+    flex-direction: column;
+    width: 160px;
+    height: 300px;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0px;
 }
 
 .drawingContainer{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    justify-content: space-evenly;
+    margin: 20px;
+    gap: 15px;
 }
 
 .topHalf{
     display: flex;
     justify-content: center;
+}
+
+#myCanvas{
+    filter: drop-shadow(10px 5px gray);
+    margin: 0px 0px 30px 0px;
+}
+
+#clearButton,#undoButton,#download{
+    width:100px;
+    height: 30px;
+    background-color: white;
+    border-radius: 3px;
+    transition: 0.2s;
+    font-size: 15px;
+    font-family:sans-serif;
+}
+
+#clearButton:hover,#undoButton:hover,#download:hover{
+    background-color: rgb(0, 0, 0);
+    color:white;
+    border-radius: 3px;
+}
+
+.sliderTitle{
+    text-align: center;
+    font-size: 15px;
+    font-family:sans-serif;
 }
