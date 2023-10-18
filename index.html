@@ -2,57 +2,65 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Drawing Page</title>
-        <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" href="draw.css">
-        <script src = "draw.js" defer> </script>
+        <title>Login</title>
+        <link rel="stylesheet" href="loginpage.css">
+        <script src="loginpage.js"></script>
     </head>
 
     <body>
 
-     <div class="nav"> 
-        <img src="logoexample.png"
-                    width="80"
-                    height="auto">
+        <center>
+            <h3>Welcome to DailyDoodles!</h3>
 
+            <!-- TODO: probably remove this 'onsubmit' behavior after we get backend auth working -->
+            <form onsubmit="event.preventDefault()" class="loginform">
+                <table>
+                    <tr>
+                        <td>Email:</td>
+                        <td><input id="loginEmailInput" class="emailinput" type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>Password:</td>
+                        <td><input id="loginPasswdInput" class="passwordinput" type="password"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a id="forgotPasswdButton" class="forgotpasswordbutton" href="">Forgot Password?</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button id="loginButton" class="loginbutton">Log In</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
 
-        <div class="buttoncontainer">    
+            <h3></h3>
 
-        <a href="index.html" class="drawingPage">
-                <button class="drawingbutton">🖍</button>
-            </a>
-
-            <a href="explorerHeating.html" class="explorerPage">
-                <button class="explorerbutton">🔍</button>
-            </a>
-
-            <a href="profile.html" class="profilePage">
-                <button class="profilebutton">👤</button>
-            </a>
-
-            <a href="leaderboard.html" class="leaderboardPage">
-                <button class="leaderboardbutton">🏆</button>
-                </a>
-        </div>  
-     </div>
-     
-     <div class="drawingContainer">
-        <div class="topHalf">
-            <ul class="drawingOptions">
-                <li></li> <label for="colorPicker">Choose Color:</label></li>
-                <li><input type="color" id="colorPicker" value="#000"></li>
-                <li><label for="lineWidthSlider">Line Width:</label></li>
-                <li> <input type="range" id="lineWidthSlider" min="1" max="30" value="1">
-                    <span id="lineWidthDisplay">1</span>
-                </li>
-                <li>  <button id="clearButton">Clear</button></li>
-                <li> <button id="undoButton">Undo</button></li>
-                <li> <button id="download"> Save Image</button></li>
-            </ul>
-        </div>
-        <div class="canvas-container">
-            <canvas id="myCanvas" width="800" height="550"></canvas> 
-         </div>
-    </div>
+            <!-- TODO: probably remove this 'onsubmit' behavior after we get backend auth working -->
+            <form onsubmit="event.preventDefault()" class="signupform">
+                <table>
+                    <tr>
+                        <td>Email:</td>
+                        <td><input id="signupEmailInput" class="emailinput" type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>Password:</td>
+                        <td><input id="signupPasswdInput" class="passwordinput" type="password"></td>
+                    </tr>
+                    <tr>
+                        <td>Reenter Password:</td>
+                        <td><input id="signpuRepasswdInput" class="repasswordinput" type="password"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button id="signupButton" class="signupbutton">Sign Up</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </center>
+        
     </body>
 </html>
