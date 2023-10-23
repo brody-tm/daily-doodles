@@ -4,7 +4,7 @@
 
 .canvas-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
     height: calc(100vh-120px);
@@ -27,8 +27,8 @@ canvas {
 }
 
 input[type="color"] {
-    width: 80px;
-    height: 40px;
+    width: 100px;
+    height: 60px;
     border: none;
     border-radius: 25px;
     padding: 0px;
@@ -67,35 +67,89 @@ input[type='range']::-webkit-slider-runnable-track {
 }
 
 
-.drawingOptions{
+.buttons{
     list-style: none;
     background-color: rgb(210, 210, 231);
     filter: drop-shadow(10px 5px gray);
     display: flex;
-    flex-direction: column;
-    width: 160px;
-    height: 300px;
+    flex-direction: column-reverse;
+    width: 180px;
+    height: 500px;
     justify-content: space-evenly;
     align-items: center;
     padding: 0px;
 }
 
+.colorSelection{
+    list-style: none;
+    background-color: rgb(210, 210, 231);
+    filter: drop-shadow(10px 5px gray);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    width: 180px;
+    height: 500px;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0px;
+    justify-items: center;
+    align-items: center;
+}
+
+
+#redBox{
+    width: 40px;
+    height: 40px;
+    background-color: red;
+}
+#greenBox{
+    width: 40px;
+    height: 40px;
+    background-color: green;
+}
+#blueBox{
+    width: 40px;
+    height: 40px;
+    background-color: blue;
+}
+#orangeBox{
+    width: 40px;
+    height: 40px;
+    background-color: orange;
+}
+#yellowBox{
+    width: 40px;
+    height: 40px;
+    background-color: yellow;
+}
+#purpleBox{
+    width: 40px;
+    height: 40px;
+    background-color: purple;
+}
+
+
 .drawingContainer{
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
     margin: 20px;
     gap: 15px;
 }
 
-.topHalf{
+.toolBar{
+    display: flex;
+    justify-content: center;
+}
+
+.colorBar{
     display: flex;
     justify-content: center;
 }
 
 #myCanvas{
-    margin: 0px 0px 30px 0px;
+    margin: 0px 0px 0px 0px;
 }
 
 #clearButton,#undoButton,#download{
@@ -108,10 +162,14 @@ input[type='range']::-webkit-slider-runnable-track {
     font-family:sans-serif;
 }
 
-#clearButton:hover,#undoButton:hover,#download:hover{
+#clearButton:hover,#undoButton:hover{
     background-color: rgb(0, 0, 0);
     color:white;
     border-radius: 3px;
+}
+
+#redBox:hover, #greenBox:hover, #blueBox:hover, #orangeBox:hover, #yellowBox:hover, #purpleBox:hover{
+    filter: brightness(1.5);
 }
 
 .sliderTitle{

@@ -93,6 +93,35 @@
   var lineWidthSlider = document.getElementById('lineWidthSlider');
   var clearButton = document.getElementById('clearButton');
   var undoButton = document.getElementById('undoButton');
+  var redBox = document.getElementById('redBox');
+  var greenBox = document.getElementById('greenBox');
+  var blueBox = document.getElementById('blueBox');
+  var orangeBox = document.getElementById('orangeBox');
+  var yellowBox = document.getElementById('yellowBox');
+  var purpleBox = document.getElementById('purpleBox');
+
+
+
+
+  //Event listeners for respective color boxes
+  redBox.addEventListener('click', function(){
+    colorPicker.value = '#FF0000';
+  });
+  greenBox.addEventListener('click', function(){
+    colorPicker.value = '#00FF00';
+  });
+  blueBox.addEventListener('click', function(){
+    colorPicker.value = '#0000FF';
+  });
+  orangeBox.addEventListener('click', function(){
+    colorPicker.value = '#FFA500';
+  });
+  yellowBox.addEventListener('click', function(){
+    colorPicker.value = '#FFFF00';
+  });
+  purpleBox.addEventListener('click', function(){
+    colorPicker.value = '#800080';
+  });
   
   
   // Event listener for the "Clear" button click

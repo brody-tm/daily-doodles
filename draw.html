@@ -36,9 +36,8 @@
      </div>
      
      <div class="drawingContainer">
-        <div class="topHalf">
-            <ul class="drawingOptions">
-                <li><input type="color" id="colorPicker" value="#000"></li>
+        <div class="toolBar">
+            <ul class="buttons">
                 <li>
                     <div class="sliderTitle">Size slider:</div>
                  <input type="range" id="lineWidthSlider" min="1" max="30" value="1">
@@ -47,6 +46,17 @@
                 <li>  <button id="clearButton">Clear</button></li>
                 <li> <button id="undoButton">Undo</button></li>
                 <li> <button id="download"> Save Image</button></li>
+            </ul>
+        </div>
+        <div class="colorBar">
+            <ul class="colorSelection">
+                <li> <button id ="redBox"></button></li>
+                <li> <button id ="greenBox"></button></li>
+                <li> <button id ="blueBox"></button></li>
+                <li> <button id ="orangeBox"></button></li>
+                <li> <button id ="yellowBox"></button></li>
+                <li> <button id ="purpleBox"></button></li>
+                <li><input type="color" id="colorPicker" value="#000"></li>
             </ul>
         </div>
         <div class="canvas-container">
