@@ -1,0 +1,5 @@
+# don't commit your .vscode :D
+.vscode/
+
+# we should not commit node-modules; run 'npm ci' instead
+node-modules/
