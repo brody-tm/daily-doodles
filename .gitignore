@@ -2,4 +2,4 @@
 .vscode/
 
 # we should not commit node-modules; run 'npm ci' instead
-node-modules/
+node_modules/
