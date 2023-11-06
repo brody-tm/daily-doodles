@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
+import DrawingTools from './DrawingTools'; // Import the DrawingTools component
+import './Canvas.css'
 
 interface CanvasProps {
   width: number;
@@ -116,46 +118,36 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
     }
   };
 
+ 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-      <div style={{ border: '1px solid lightgray', background: 'lightgray', padding: '10px', borderRadius: '5px' }}>
-        <div>
-          <label htmlFor="colorPicker">Choose Color: </label>
-          <input
-            type="color"
-            id="colorPicker"
-            value={color}
-            onChange={handleColorChange}
-          />
-        </div>
-        <div style={{ marginTop: '10px' }}>
-          <label htmlFor="lineWidthSlider">Line Width: </label>
-          <input
-            type="range"
-            id="lineWidthSlider"
-            min="1"
-            max="30"
-            value={lineWidth}
-            onChange={handleLineWidthChange}
-          />
-          <span>{lineWidth}</span>
-        </div>
-        <div style={{ marginTop: '10px' }}>
-          <button onClick={handleUndo}>Undo</button>
-          <button onClick={handleClearCanvas}>Clear</button>
-        </div>
+    <div className="canvas-container">
+      <div className="drawing-tools">
+        <DrawingTools
+          lineWidth={lineWidth}
+          color={color}
+          onColorChange={setColor}
+          onLineWidthChange={setLineWidth}
+          onClearCanvas={handleClearCanvas}
+          onUndo={handleUndo}
+        />
       </div>
-      <div>
+      <div className="canvas">
         <canvas
           ref={canvasRef}
           width={width}
           height={height}
-          style={{ border: '1px solid black', background: 'white' }}
+          style={{
+            background: 'white',
+            border: '10px solid black', // Add the border style
+            boxShadow: '5px 5px 10px rgba(0, 0, 0, 0.3)', // Add the box shadow
+            borderRadius: '5px',
+          }}
         />
       </div>
     </div>
   );
 };
+
 
 
 export default Canvas;
