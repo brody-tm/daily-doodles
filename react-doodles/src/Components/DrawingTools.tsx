@@ -1,4 +1,5 @@
 import React from 'react';
+import './Canvas.css'
 
 interface DrawingToolsProps {
   lineWidth: number;
@@ -18,8 +19,8 @@ const DrawingTools: React.FC<DrawingToolsProps> = ({
   onUndo,
 }) => {
   return (
-    <div style={{ border: '1px solid lightgray', background: 'lightgray', padding: '10px', borderRadius: '5px' }}>
-      <div>
+    <div className="tools-container">
+      <div className="canvas-tools">
         <label htmlFor="colorPicker">Choose Color: </label>
         <input
           type="color"
@@ -28,7 +29,7 @@ const DrawingTools: React.FC<DrawingToolsProps> = ({
           onChange={(e) => onColorChange(e.target.value)}
         />
       </div>
-      <div style={{ marginTop: '10px' }}>
+      <div className="canvas-tools">
         <label htmlFor="lineWidthSlider">Line Width: </label>
         <input
           type="range"
@@ -40,7 +41,7 @@ const DrawingTools: React.FC<DrawingToolsProps> = ({
         />
         <span>{lineWidth}</span>
       </div>
-      <div style={{ marginTop: '10px' }}>
+      <div className="canvas-tools">
         <button onClick={onUndo}>Undo</button>
         <button onClick={onClearCanvas}>Clear</button>
       </div>

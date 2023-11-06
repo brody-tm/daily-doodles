@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const HeadingContainer = styled.div`
   background-color: rgb(255, 74, 0);
@@ -7,10 +7,13 @@ const HeadingContainer = styled.div`
   margin: 15px auto;
   text-align: center;
   font-size: 36px;
+  font-weight: bold;
   color: white;
   border: 2px solid #222;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: "YourBubbleFont", sans-serif; // Use the bubble font here
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 `;
 
 const SubheadingContainer = styled.div`
@@ -24,7 +27,6 @@ const SubheadingContainer = styled.div`
   border-radius: 12px; /* Rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow */
 `;
-
 
 interface HeadingProps {
   text: string;

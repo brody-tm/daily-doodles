@@ -121,28 +121,30 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
  
   return (
     <div className="canvas-container">
-      <div className="drawing-tools">
-        <DrawingTools
-          lineWidth={lineWidth}
-          color={color}
-          onColorChange={setColor}
-          onLineWidthChange={setLineWidth}
-          onClearCanvas={handleClearCanvas}
-          onUndo={handleUndo}
-        />
-      </div>
-      <div className="canvas">
-        <canvas
-          ref={canvasRef}
-          width={width}
-          height={height}
-          style={{
-            background: 'white',
-            border: '10px solid black', // Add the border style
-            boxShadow: '5px 5px 10px rgba(0, 0, 0, 0.3)', // Add the box shadow
-            borderRadius: '5px',
-          }}
-        />
+      <div className="canvas-and-tools">
+        <div className="drawing-tools">
+          <DrawingTools
+            lineWidth={lineWidth}
+            color={color}
+            onColorChange={setColor}
+            onLineWidthChange={setLineWidth}
+            onClearCanvas={handleClearCanvas}
+            onUndo={handleUndo}
+          />
+        </div>
+        <div className="canvas-center">
+          <canvas
+            ref={canvasRef}
+            width={width}
+            height={height}
+            style={{
+              background: 'white',
+              border: '10px solid black', // Add the border style
+              boxShadow: '5px 5px 10px rgba(0, 0, 0, 0.3)', // Add the box shadow
+              borderRadius: '5px',
+            }}
+          />
+        </div>
       </div>
     </div>
   );
