@@ -1,8 +1,9 @@
 import Heading from '../Components/Heading';
-import React from 'react';
-function ExplorerPage(){
+import "./profile.css";
+function Profile(){
     return(
         <Heading text='Profile'></Heading>
-    )
-}
-export default ExplorerPage;
+        
+        )
+                                                }
+                                                export default Profile;
