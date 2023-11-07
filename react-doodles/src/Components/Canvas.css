@@ -1,12 +1,15 @@
 /* DrawingTools.css */
+/* Peter Sorrentino*/
 
 .drawing-tools {
-    display: flex;
+    display: flex;  /*Aligns dynamically*/
     flex-direction: row; /* Display tools in one row */
     align-items: center; /* Center tools vertically */
     margin-right: 20px;
   }
   
+
+  /*Button and slider styling*/
   .drawing-tools button,
   .drawing-tools input[type="range"],
   .drawing-tools select {
@@ -22,12 +25,14 @@
     transition: background 0.3s ease-in-out;
   }
   
+  /*Hover over characteristics*/
   .drawing-tools button:hover,
   .drawing-tools input[type="range"]:hover,
   .drawing-tools select:hover {
     background: #0056b3;
   }
   
+  /*Slider Specific styling*/
   .drawing-tools input[type="range"] {
     appearance: none;
     height: 10px;
@@ -38,6 +43,7 @@
     transition: background 0.3s ease-in-out;
   }
   
+  /*Slider knob styling*/
   .drawing-tools input[type="range"]::-webkit-slider-thumb {
     appearance: none;
     width: 20px;
@@ -57,25 +63,25 @@
   }
   
   .drawing-tools button:first-child {
-    margin-left: 0; /* Remove margin on the first button */
-    margin-right: 5px; /* Add margin between buttons */
+    margin-left: 0; 
+    margin-right: 5px; 
   }
   
   .drawing-tools button:last-child {
-    margin-right: 0; /* Remove margin on the last button */
+    margin-right: 0; 
   }
   .tools-container {
     display: flex;
-    justify-content: center; /* Center the tools horizontally */
-    align-items: center; /* Center the tools vertically */
-    text-align: center; /* Center text within tools */
+    justify-content: center; 
+    align-items: center; 
+    text-align: center;
   }
   
   .canvas-tools {
-    margin: 0 10px; /* Add spacing between tools */
-    font-family: 'YourBubbleFont', sans-serif; /* Use the same font family as in the heading */
+    margin: 0 10px;
+    font-family: 'YourBubbleFont', sans-serif;
   }
   
   
-  /* Add any additional styles or adjustments as needed */
+
   

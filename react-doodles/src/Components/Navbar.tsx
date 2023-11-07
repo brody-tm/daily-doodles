@@ -18,7 +18,7 @@ const Navbar: React.FC = () => {
       
         <Link to="/profile" className="NavButton"><AccountBoxIcon/></Link>
      
-        <Link to="leaderboard"className="NavButton"><EmojiEventsIcon/></Link>
+        <Link to="/leaderboard"className="NavButton"><EmojiEventsIcon/></Link>
      
     </nav>
   );

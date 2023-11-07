@@ -1,5 +1,11 @@
+/*
+Peter Sorrentino
+Canvas functionality for user drawing and tool relations
+TSX and HTML
+*/
+
 import React, { useEffect, useRef, useState } from 'react';
-import DrawingTools from './DrawingTools'; // Import the DrawingTools component
+import DrawingTools from './DrawingTools'; 
 import './Canvas.css'
 
 interface CanvasProps {
@@ -11,8 +17,8 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [lineWidth, setLineWidth] = useState(5);
   const [color, setColor] = useState('#000');
-  const [undoStack, setUndoStack] = useState<ImageData[]>([]); // Store canvas state as ImageData
-  const [drawingState, setDrawingState] = useState<ImageData | null>(null); // Added state to track drawing state
+  const [undoStack, setUndoStack] = useState<ImageData[]>([]);
+  const [drawingState, setDrawingState] = useState<ImageData | null>(null); 
   let isDrawing = false;
 
   useEffect(() => {
@@ -33,7 +39,7 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
           isDrawing = true;
           lastX = e.offsetX;
           lastY = e.offsetY;
-          saveCanvasState(); // Save canvas state before drawing starts
+          saveCanvasState(); 
         };
 
         const handleMouseMove = (e: MouseEvent) => {
@@ -56,7 +62,7 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
 
         const handleMouseUp = () => {
           isDrawing = false;
-          saveCanvasState(); // Save canvas state after drawing ends
+          saveCanvasState();
         };
 
         canvas.addEventListener('mousedown', handleMouseDown);
@@ -139,8 +145,8 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
             height={height}
             style={{
               background: 'white',
-              border: '10px solid black', // Add the border style
-              boxShadow: '5px 5px 10px rgba(0, 0, 0, 0.3)', // Add the box shadow
+              border: '10px solid black',
+              boxShadow: '5px 5px 10px rgba(0, 0, 0, 0.3)', 
               borderRadius: '5px',
             }}
           />

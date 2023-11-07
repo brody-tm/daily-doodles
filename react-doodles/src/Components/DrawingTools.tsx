@@ -1,3 +1,7 @@
+/* Peter Sorrentino
+  Drawing tools components, Undo, Clear, Slider, Color Selecter
+*/
+
 import React from 'react';
 import './Canvas.css'
 
