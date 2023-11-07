@@ -24,14 +24,19 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (canvas) {
-      const context = canvas.getContext('2d');
+      const context = canvas.getContext("2d");
 
       if (context) {
         let lastX = 0;
         let lastY = 0;
 
         const saveCanvasState = () => {
-          const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+          const imageData = context.getImageData(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+          );
           setUndoStack((prevStack) => [...prevStack, imageData]);
         };
 
@@ -47,7 +52,7 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
 
           if (!context) return;
 
-          context.lineCap = 'round';
+          context.lineCap = "round";
           context.strokeStyle = color;
           context.lineWidth = lineWidth;
 
@@ -65,14 +70,14 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
           saveCanvasState();
         };
 
-        canvas.addEventListener('mousedown', handleMouseDown);
-        canvas.addEventListener('mousemove', handleMouseMove);
-        canvas.addEventListener('mouseup', handleMouseUp);
+        canvas.addEventListener("mousedown", handleMouseDown);
+        canvas.addEventListener("mousemove", handleMouseMove);
+        canvas.addEventListener("mouseup", handleMouseUp);
 
         return () => {
-          canvas.removeEventListener('mousedown', handleMouseDown);
-          canvas.removeEventListener('mousemove', handleMouseMove);
-          canvas.removeEventListener('mouseup', handleMouseUp);
+          canvas.removeEventListener("mousedown", handleMouseDown);
+          canvas.removeEventListener("mousemove", handleMouseMove);
+          canvas.removeEventListener("mouseup", handleMouseUp);
         };
       }
     }
@@ -88,7 +93,7 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
 
   const handleClearCanvas = () => {
     const canvas = canvasRef.current;
-    const context = canvas?.getContext('2d');
+    const context = canvas?.getContext("2d");
 
     if (canvas && context) {
       // Clear the canvas
@@ -106,7 +111,7 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
   const handleUndo = () => {
     if (undoStack.length > 0) {
       const canvas = canvasRef.current;
-      const context = canvas?.getContext('2d');
+      const context = canvas?.getContext("2d");
 
       if (canvas && context) {
         context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
@@ -124,7 +129,6 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
     }
   };
 
- 
   return (
     <div className="canvas-container">
       <div className="canvas-and-tools">
@@ -155,7 +159,5 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
     </div>
   );
 };
-
-
 
 export default Canvas;
