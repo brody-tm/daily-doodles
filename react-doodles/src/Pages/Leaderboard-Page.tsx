@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import '../Styles/leaderboard.css'
 import styled from "styled-components";
 import Heading from "../Components/Heading";
-import Navbar from "../Components/Navbar";
 import Post from "../Components/Post";
 import DisplayModeButtons from "../Components/DisplayModeButtons";
 
