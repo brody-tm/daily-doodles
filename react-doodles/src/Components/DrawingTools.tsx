@@ -1,5 +1,5 @@
-import React from 'react';
-import './Canvas.css'
+import React from "react";
+import "../Styles/Canvas.css";
 
 interface DrawingToolsProps {
   lineWidth: number;

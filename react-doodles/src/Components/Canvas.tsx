@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import DrawingTools from "./DrawingTools"; // Import the DrawingTools component
-import "./Canvas.css";
+import "../Styles/Canvas.css";
 
 interface CanvasProps {
   width: number;

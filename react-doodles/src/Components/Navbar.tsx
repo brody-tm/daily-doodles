@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Link } from "react-router-dom";
-import "./navbar.css";
+import "../Styles/navbar.css";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import ExploreIcon from "@mui/icons-material/Explore";
