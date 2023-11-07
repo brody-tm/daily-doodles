@@ -4,9 +4,9 @@ Canvas functionality for user drawing and tool relations
 TSX and HTML
 */
 
-import React, { useEffect, useRef, useState } from 'react';
-import DrawingTools from './DrawingTools'; 
-import './Canvas.css'
+import React, { useEffect, useRef, useState } from "react";
+import DrawingTools from "./DrawingTools";
+import "../Styles/Canvas.css";
 
 interface CanvasProps {
   width: number;
@@ -16,9 +16,9 @@ interface CanvasProps {
 const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [lineWidth, setLineWidth] = useState(5);
-  const [color, setColor] = useState('#000');
+  const [color, setColor] = useState("#000");
   const [undoStack, setUndoStack] = useState<ImageData[]>([]);
-  const [drawingState, setDrawingState] = useState<ImageData | null>(null); 
+  const [drawingState, setDrawingState] = useState<ImageData | null>(null);
   let isDrawing = false;
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
           isDrawing = true;
           lastX = e.offsetX;
           lastY = e.offsetY;
-          saveCanvasState(); 
+          saveCanvasState();
         };
 
         const handleMouseMove = (e: MouseEvent) => {
@@ -148,10 +148,10 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
             width={width}
             height={height}
             style={{
-              background: 'white',
-              border: '10px solid black',
-              boxShadow: '5px 5px 10px rgba(0, 0, 0, 0.3)', 
-              borderRadius: '5px',
+              background: "white",
+              border: "10px solid black",
+              boxShadow: "5px 5px 10px rgba(0, 0, 0, 0.3)",
+              borderRadius: "5px",
             }}
           />
         </div>
