@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import DrawingTools from './DrawingTools'; // Import the DrawingTools component
-import './Canvas.css'
+import React, { useEffect, useRef, useState } from "react";
+import DrawingTools from "./DrawingTools"; // Import the DrawingTools component
+import "./Canvas.css";
 
 interface CanvasProps {
   width: number;
@@ -10,7 +10,7 @@ interface CanvasProps {
 const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [lineWidth, setLineWidth] = useState(5);
-  const [color, setColor] = useState('#000');
+  const [color, setColor] = useState("#000");
   const [undoStack, setUndoStack] = useState<ImageData[]>([]); // Store canvas state as ImageData
   const [drawingState, setDrawingState] = useState<ImageData | null>(null); // Added state to track drawing state
   let isDrawing = false;
@@ -18,14 +18,19 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (canvas) {
-      const context = canvas.getContext('2d');
+      const context = canvas.getContext("2d");
 
       if (context) {
         let lastX = 0;
         let lastY = 0;
 
         const saveCanvasState = () => {
-          const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+          const imageData = context.getImageData(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+          );
           setUndoStack((prevStack) => [...prevStack, imageData]);
         };
 
@@ -41,7 +46,7 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
 
           if (!context) return;
 
-          context.lineCap = 'round';
+          context.lineCap = "round";
           context.strokeStyle = color;
           context.lineWidth = lineWidth;
 
@@ -59,14 +64,14 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
           saveCanvasState(); // Save canvas state after drawing ends
         };
 
-        canvas.addEventListener('mousedown', handleMouseDown);
-        canvas.addEventListener('mousemove', handleMouseMove);
-        canvas.addEventListener('mouseup', handleMouseUp);
+        canvas.addEventListener("mousedown", handleMouseDown);
+        canvas.addEventListener("mousemove", handleMouseMove);
+        canvas.addEventListener("mouseup", handleMouseUp);
 
         return () => {
-          canvas.removeEventListener('mousedown', handleMouseDown);
-          canvas.removeEventListener('mousemove', handleMouseMove);
-          canvas.removeEventListener('mouseup', handleMouseUp);
+          canvas.removeEventListener("mousedown", handleMouseDown);
+          canvas.removeEventListener("mousemove", handleMouseMove);
+          canvas.removeEventListener("mouseup", handleMouseUp);
         };
       }
     }
@@ -82,7 +87,7 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
 
   const handleClearCanvas = () => {
     const canvas = canvasRef.current;
-    const context = canvas?.getContext('2d');
+    const context = canvas?.getContext("2d");
 
     if (canvas && context) {
       // Clear the canvas
@@ -100,7 +105,7 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
   const handleUndo = () => {
     if (undoStack.length > 0) {
       const canvas = canvasRef.current;
-      const context = canvas?.getContext('2d');
+      const context = canvas?.getContext("2d");
 
       if (canvas && context) {
         context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
@@ -118,7 +123,6 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
     }
   };
 
- 
   return (
     <div className="canvas-container">
       <div className="canvas-and-tools">
@@ -138,10 +142,10 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
             width={width}
             height={height}
             style={{
-              background: 'white',
-              border: '10px solid black', // Add the border style
-              boxShadow: '5px 5px 10px rgba(0, 0, 0, 0.3)', // Add the box shadow
-              borderRadius: '5px',
+              background: "white",
+              border: "10px solid black", // Add the border style
+              boxShadow: "5px 5px 10px rgba(0, 0, 0, 0.3)", // Add the box shadow
+              borderRadius: "5px",
             }}
           />
         </div>
@@ -149,7 +153,5 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
     </div>
   );
 };
-
-
 
 export default Canvas;
