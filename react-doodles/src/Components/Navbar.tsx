@@ -12,19 +12,19 @@ const Navbar: React.FC = () => {
     <nav className="container">
       <img src="Logo.png" alt="" className="logo" />
 
-      <Link to="/" className="NavButton">
+      <Link to="Drawing" className="NavButton">
         <BrushIcon />
       </Link>
 
-      <Link to="/Explore" className="NavButton">
+      <Link to="Explore" className="NavButton">
         <ExploreIcon />
       </Link>
 
-      <Link to="/Profile" className="NavButton">
+      <Link to="Profile" className="NavButton">
         <AccountBoxIcon />
       </Link>
 
-      <Link to="leaderboard" className="NavButton">
+      <Link to="Leaderboard" className="NavButton">
         <EmojiEventsIcon />
       </Link>
     </nav>
