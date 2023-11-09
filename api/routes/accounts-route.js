@@ -1,5 +1,9 @@
 import express from "express";
 
-const router = express.Router()
+const router = express.Router();
 
-export default router
+router.get("/", (req, res) => {
+  res.send("Responding to account related request.");
+});
+
+export default router;
