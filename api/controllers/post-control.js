@@ -1,5 +1,5 @@
 import { dbConnection } from "../db-connect.js";
-import Jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import moment from "moment";
 
 export const getPosts = (req, res) => {
