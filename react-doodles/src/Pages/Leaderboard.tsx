@@ -81,7 +81,6 @@ function LeaderboardApp() {
               title="My Awesome Post"
               description="Check out my latest creation!"
             />
-            {/* Add more global posts */}
           </>
         )}
       </AppContainer>
