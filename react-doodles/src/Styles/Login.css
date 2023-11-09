@@ -24,6 +24,12 @@
     }
 }
 
+.title{
+    width: 1100px;
+    position:absolute;
+    top: 170px;
+}
+
 .guest{
     font: 14pt "Cooper Black";
     margin-top: 400px;

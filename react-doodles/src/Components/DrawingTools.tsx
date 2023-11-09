@@ -1,9 +1,5 @@
-/* Peter Sorrentino
-  Drawing tools components, Undo, Clear, Slider, Color Selecter
-*/
-
-import React from 'react';
-import '../Styles/Canvas.css'
+import React from "react";
+import "../Styles/Canvas.css";
 
 interface DrawingToolsProps {
   lineWidth: number;

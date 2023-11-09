@@ -1,9 +1,3 @@
-/*
-Peter Sorrentino
-Canvas functionality for user drawing and tool relations
-TSX and HTML
-*/
-
 import React, { useEffect, useRef, useState } from "react";
 import DrawingTools from "./DrawingTools";
 import "../Styles/Canvas.css";
