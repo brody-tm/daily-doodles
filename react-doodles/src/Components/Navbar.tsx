@@ -10,7 +10,7 @@ import BrushIcon from "@mui/icons-material/Brush";
 
 const Navbar: React.FC = () => {
   return (
-    <nav className="container">
+    <nav className="Navcontainer">
       <img src={Logo} alt="Logo" className="logo" />
 
       <Link to="Drawing" className="NavButton">

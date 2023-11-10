@@ -28,12 +28,13 @@
 }
 
 }
-.container{
+.Navcontainer{
   background-color: #1C6468;
   padding: 0px;
   margin: -10px;
   display: flex;
-  justify-content:space-evenly;
+  padding-left: 140px;
+  justify-content:left;
   align-items: center;
   position: relative;
 }
