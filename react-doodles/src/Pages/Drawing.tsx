@@ -1,6 +1,7 @@
 import React from "react";
 import Canvas from "../Components/Canvas";
 import Heading from "../Components/Heading";
+import Caption from "../Components/Caption";
 import styled from "styled-components";
 
 const AppContainer = styled.div`
@@ -32,10 +33,9 @@ const DrawingApp: React.FC = () => {
             marginTop: "10px",
           }}
         >
-          {/* Drawing tools here */}
-          {/* Add your color picker, line width slider, undo, and clear buttons */}
-        </div>
+         </div>
       </CanvasContainer>
+      <Caption text="Caption"></Caption>
     </AppContainer>
   );
 };

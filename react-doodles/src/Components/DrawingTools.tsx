@@ -35,7 +35,7 @@ const DrawingTools: React.FC<DrawingToolsProps> = ({
           type="range"
           id="lineWidthSlider"
           min="1"
-          max="30"
+          max="60"
           value={lineWidth}
           onChange={(e) => onLineWidthChange(parseInt(e.target.value))}
         />
