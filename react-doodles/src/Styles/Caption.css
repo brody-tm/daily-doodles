@@ -1,0 +1,22 @@
+/* caption.css */
+
+.caption-container {
+    width: 20%;
+    border: 2px solid #000; /* Strong border */
+    background-color: #fffafa; /* Cream-white background */
+    padding: 10px;
+    margin: 0 20px; /* Margin to provide spacing */
+  }
+  
+  .caption-textbox {
+    width: 100%;
+    box-sizing: border-box; /* Include padding in the width */
+    border: none;
+    outline: none;
+    resize: none; /* Disable textarea resizing */
+  }
+  
+  .caption-label {
+    display: none; /* Hide the label for now */
+  }
+  
