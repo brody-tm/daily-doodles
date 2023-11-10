@@ -1,23 +1,38 @@
-import React from "react";
-
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../Styles/Login.css";
 import Title from "../title.png";
-function LoginPage() {
-  return (
-    <div className="page">
-      <img src={Title} alt="title" className="title" />
+import LoginPopup from "../Components/loginPopup";
 
-      <button className="button" type="button">
-        login
-      </button>
-      <Link to="app/Drawing" className="guest">
-        {"continue as guest"}
-      </Link>
-      <button className="button" type="button">
-        sign-up
-      </button>
-    </div>
+function LoginPage() {
+  const [loginPopupVisible, setLoginPopupVisible] = useState(false);
+
+  const openLoginPopup = () => {
+    setLoginPopupVisible(true);
+  };
+
+  const closeLoginPopup = () => {
+    setLoginPopupVisible(false);
+  };
+
+  return (
+    <>
+      <div className="page">
+        <img src={Title} alt="title" className="title" />
+        <button className="button" type="button" onClick={openLoginPopup}>
+          Login
+        </button>
+        <Link to="app/Drawing" className="guest">
+          {"Continue as guest"}
+        </Link>
+        <button className="button" type="button">
+          Sign-up
+        </button>
+      </div>
+      {loginPopupVisible && (
+        <LoginPopup onClose={closeLoginPopup} onLogin={closeLoginPopup} />
+      )}
+    </>
   );
 }
 
