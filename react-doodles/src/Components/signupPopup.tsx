@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import "../Styles/loginPopup.css";
 
-interface LoginPopupProps {
+interface SignUpPopupProps {
   onClose: () => void; // Define the type for onClose
-  onLogin: () => void; // Define the type for onLogin
+  onSignUp: () => void; // Define the type for onLogin
 }
 
-function LoginPopup({ onClose, onLogin }: LoginPopupProps) {
+function SignUpPopup({ onClose, onSignUp }: SignUpPopupProps) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
+  const handleSignUp = () => {
     // login logic here and call onLogin when successful.
     console.log("Username: ", username);
     console.log("Password: ", password);
@@ -25,10 +25,10 @@ function LoginPopup({ onClose, onLogin }: LoginPopupProps) {
         <span className="close-button" onClick={onClose}>
           &times;
         </span>
-        <h2>Login</h2>
+        <h2>Sign-up</h2>
         <input
           type="text"
-          placeholder="Username"
+          placeholder="Email"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
@@ -38,13 +38,16 @@ function LoginPopup({ onClose, onLogin }: LoginPopupProps) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={handleLogin}>Login</button>
-        <a href="" className="forgot_password">
-          forgot your password?
-        </a>
+        <input
+          type="password"
+          placeholder="Re-enter Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button onClick={handleSignUp}>Sign-Up</button>
       </div>
     </div>
   );
 }
 
-export default LoginPopup;
+export default SignUpPopup;
