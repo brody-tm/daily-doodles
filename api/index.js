@@ -2,7 +2,7 @@
 import postRoutes from "./routes/posts-route.js";
 import likeRoutes from "./routes/likes-route.js";
 import commentRoutes from "./routes/comments-route.js";
-import accountRoutes from "./routes/accounts-route.js";
+import profileRoutes from "./routes/profiles-route.js";
 
 import Express from "express";
 const app = Express();
@@ -19,7 +19,7 @@ app.use(cookieParser());
 app.use("/api/post", postRoutes);
 app.use("/api/like", likeRoutes);
 app.use("/api/comment", commentRoutes);
-app.use("/api/account", accountRoutes);
+app.use("/api/profile", profileRoutes);
 
 app.get("/", (req, res) => {
   res.send("Responding to request for main page.");
