@@ -11,7 +11,7 @@ router.get("/get-profile", getProfile);//DOES THIS NEED /:userID in it??
 router.get("/get-name", getName);
 router.get("/get-prof-pic", getPic);
 
-router.get("/change-name", setName);
+router.put("/change-name", setName);
 router.put("/change-pic", setPic);
 
 
