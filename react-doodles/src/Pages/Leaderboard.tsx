@@ -5,6 +5,10 @@ import Heading from "../Components/Heading";
 import Post from "../Components/Post";
 import DisplayModeButtons from "../Components/DisplayModeButtons";
 
+import samplePic1 from "../leaderboardPic1.png";
+import samplePic2 from "../leaderboardPic2.png";
+import samplePic3 from "../leaderboardPic2.png";
+
 const AppContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -26,7 +30,7 @@ const FirstPlace = styled.div`
 `;
 
 const BronzeBorder: React.CSSProperties = {
-  border: '10px solid #cd7f32',
+  border: "10px solid #cd7f32",
 };
 
 function LeaderboardApp() {
@@ -52,7 +56,7 @@ function LeaderboardApp() {
               <Post
                 username="User456"
                 userProfilePic="../Logo.png"
-                imageSrc="../leaderboardPic2.png"
+                imageSrc={samplePic1}
                 title="Another Post"
                 description="More amazing content!"
                 style={{ border: "10px solid silver" }}
@@ -61,7 +65,7 @@ function LeaderboardApp() {
                 <Post
                   username="User123"
                   userProfilePic="../Logo.png"
-                  imageSrc="../leaderboardPic1.png"
+                  imageSrc={samplePic3}
                   title="My Awesome Post"
                   description="Check out my latest creation!"
                   style={{ border: "10px solid gold" }}
@@ -70,10 +74,10 @@ function LeaderboardApp() {
               <Post
                 username="User789"
                 userProfilePic="../Logo.png"
-                imageSrc="../leaderboardPic1.png"
+                imageSrc={samplePic2}
                 title="Great Post"
                 description="Don't miss it!"
-                style={ BronzeBorder }
+                style={BronzeBorder}
               />
             </>
           )}
@@ -82,7 +86,7 @@ function LeaderboardApp() {
               <Post
                 username="User456"
                 userProfilePic="../Logo.png"
-                imageSrc="../leaderboardPic2.png"
+                imageSrc={samplePic1}
                 title="Another Post"
                 description="More amazing content!"
                 style={{ border: "10px solid silver" }}
@@ -91,7 +95,7 @@ function LeaderboardApp() {
                 <Post
                   username="User123"
                   userProfilePic="../Logo.png"
-                  imageSrc="../leaderboardPic1.png"
+                  imageSrc={samplePic2}
                   title="My Awesome Post"
                   description="Check out my latest creation!"
                   style={{ border: "10px solid gold" }}
@@ -100,10 +104,10 @@ function LeaderboardApp() {
               <Post
                 username="User789"
                 userProfilePic="../Logo.png"
-                imageSrc="../leaderboardPic3.png"
+                imageSrc={samplePic3}
                 title="Great Post"
                 description="Don't miss it!"
-                style={ BronzeBorder }
+                style={BronzeBorder}
               />
             </>
           )}
