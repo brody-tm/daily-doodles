@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const PostContainer = styled.div`
-  width: 25%;
+  width: 400px;
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -13,6 +13,9 @@ const PostContainer = styled.div`
   margin: 16px;
   background: white;
   text-align: left;
+  height: 600px
+  display: flex;
+  flex-direction: column;
 `;
 
 const UserContainer = styled.div`
@@ -51,6 +54,7 @@ const Caption = styled.div`
   background: lightgray;
   padding: 8px;
   border-radius: 8px;
+  margin-top: auto; 
 `;
 
 const Title = styled.div`
@@ -71,13 +75,15 @@ const LikeButton = styled.button`
   font-size: 20px;
 `;
 
+
 const Post: React.FC<{
   username: string;
   userProfilePic: string;
   imageSrc: string;
   title: string;
   description: string;
-}> = ({ username, userProfilePic, imageSrc, title, description }) => {
+  style?: React.CSSProperties;
+}> = ({ username, userProfilePic, imageSrc, title, description, style }) => {
   const [likes, setLikes] = useState(0);
 
   const handleLike = () => {
@@ -85,7 +91,7 @@ const Post: React.FC<{
   };
 
   return (
-    <PostContainer>
+    <PostContainer style={style}> 
       <UserContainer>
         <UserProfilePic src={userProfilePic} alt={`${username}'s Profile Pic`} />
         <UserName>{username}</UserName>
