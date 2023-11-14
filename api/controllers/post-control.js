@@ -3,9 +3,11 @@ import jwt from "jsonwebtoken";
 import moment from "moment";
 
 export const getPost = (req, res) => {
-  const q = "SELECT * FROM DailyDoodlesDB.posts WHERE id = 1";
+  const q = "SELECT * FROM DailyDoodlesDB.posts WHERE 'id' = ?";
 
-  dbConnection.query(q, (queryError, results) => {
+  const postId = req.body.postId;
+
+  dbConnection.query(q, postId, (queryError, results) => {
     if (queryError) {
       console.error("Error executing the query:", queryError);
       return;
@@ -36,14 +38,13 @@ export const getPost = (req, res) => {
 };
 
 export const addPost = (req, res) => {
-  const q = "INSERT INTO DailyDoodlesDB.posts VALUES (?)";
+  const q =
+    "INSERT INTO DailyDoodlesDB.posts(`desc`, `body`, `user_id`, `created_at`) VALUES (?)";
 
   const values = [
-    req.body.id,
-    req.body.title,
+    req.body.desc,
     req.body.body,
     req.body.user_id,
-    req.body.status,
     moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
   ];
 
