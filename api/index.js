@@ -1,4 +1,4 @@
-// import authRoutes from "./routes/auth-route.js";
+import authRoutes from "./routes/auth-route.js";
 import postRoutes from "./routes/posts-route.js";
 import likeRoutes from "./routes/likes-route.js";
 import commentRoutes from "./routes/comments-route.js";
@@ -15,7 +15,7 @@ app.use(Express.json());
 app.use(cors());
 app.use(cookieParser());
 
-// app.use("/api/auth", authRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/like", likeRoutes);
 app.use("/api/comment", commentRoutes);
