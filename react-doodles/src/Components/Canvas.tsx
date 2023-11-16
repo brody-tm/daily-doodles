@@ -93,14 +93,6 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
     }
   }, [width, height, lineWidth, color]);
 
-  /**const handleColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setColor(e.target.value);
-  };
-  
-  const handleLineWidthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLineWidth(parseInt(e.target.value));
-  };
-  */
   //Function to clear canvas on button press
   const handleClearCanvas = () => {
     const canvas = canvasRef.current;
@@ -109,9 +101,6 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
     if (canvas && context) {
       // Clear the canvas
       context.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Reset the undo stack
-      //setUndoStack([]);
 
       // Save the cleared canvas state
       const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
