@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../Styles/Login.css";
 import Title from "../title.png";
 import LoginPopup from "../Components/loginPopup";
 import SignUpPopup from "../Components/signupPopup";
 
 function LoginPage() {
+  const navigate = useNavigate(); //TEMP
   const [loginPopupVisible, setLoginPopupVisible] = useState(false);
   const [signUpPopupVisible, setSignUpPopupVisible] = useState(false);
 
@@ -27,6 +28,18 @@ function LoginPage() {
     setLoginPopupVisible(false);
   };
 
+  const handleLogin = () => {
+    // login logic here
+    closeLoginPopup();
+    navigate("app/Drawing"); //TEMP
+  };
+
+  const handleSignUp = () => {
+    // signup logic here
+    closeSignUpPopup();
+    navigate("app/Drawing"); //TEMP
+  };
+
   return (
     <>
       <div className="page">
@@ -42,10 +55,10 @@ function LoginPage() {
         </button>
       </div>
       {loginPopupVisible && (
-        <LoginPopup onClose={closeLoginPopup} onLogin={closeLoginPopup} />
+        <LoginPopup onClose={closeLoginPopup} onLogin={handleLogin} />
       )}
       {signUpPopupVisible && (
-        <SignUpPopup onClose={closeSignUpPopup} onSignUp={closeSignUpPopup} />
+        <SignUpPopup onClose={closeSignUpPopup} onSignUp={handleSignUp} />
       )}
     </>
   );
