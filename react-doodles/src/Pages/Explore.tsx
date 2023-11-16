@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import samplePic1 from "../leaderboardPic1.png";
 import samplePic2 from "../leaderboardPic2.png";
 import samplePic3 from "../leaderboardPic2.png";
+import "../Styles/Explorer.css";
 
 
 const AppContainer = styled.div`
