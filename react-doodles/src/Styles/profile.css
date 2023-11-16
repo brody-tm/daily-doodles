@@ -25,7 +25,7 @@ ul{
 /* column specific */
 .column{
  padding: 20px;
- height:420px;
+ height:600px;
  border-radius: 20px;
  border: solid grey 2px;
  margin-left: 10px;
@@ -56,6 +56,8 @@ ul{
     display: block;
     justify-content: center;
     align-items: center;
+    background-color: aliceblue;
+    font-size: 40px;
 }
 
 li{
@@ -79,5 +81,19 @@ li{
     border: 2px;
     border-style: ridge;
     filter: drop-shadow(10px 5px gray);
+}
+
+img{
+    width:360px;
+    height:auto;
+margin:0px;
+}
+
+.gallaryContainer{
+    margin-top: 20px;
+    display:flex;
+    flex-wrap: wrap;
+
+
 }
 
