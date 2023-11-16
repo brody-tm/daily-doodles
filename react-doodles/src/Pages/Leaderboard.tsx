@@ -7,7 +7,7 @@ import DisplayModeButtons from "../Components/DisplayModeButtons";
 
 import samplePic1 from "../images/leaderboardPic1.png";
 import samplePic2 from "../images/leaderboardPic2.png";
-import samplePic3 from "../images/leaderboardPic2.png";
+import samplePic3 from "../images/leaderboardPic3.png";
 
 const AppContainer = styled.div`
   display: flex;
@@ -56,7 +56,7 @@ function LeaderboardApp() {
               <Post
                 username="User456"
                 userProfilePic="../Logo.png"
-                imageSrc={samplePic1}
+                imageSrc={samplePic3}
                 title="Another Post"
                 description="More amazing content!"
                 style={{ border: "10px solid silver" }}
@@ -65,7 +65,7 @@ function LeaderboardApp() {
                 <Post
                   username="User123"
                   userProfilePic="../Logo.png"
-                  imageSrc={samplePic3}
+                  imageSrc={samplePic1}
                   title="My Awesome Post"
                   description="Check out my latest creation!"
                   style={{ border: "10px solid gold" }}
