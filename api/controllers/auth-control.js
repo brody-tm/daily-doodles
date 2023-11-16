@@ -1,13 +1,16 @@
-import dbConnection from "../db-connect.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import moment from "moment";
 
-// TODO modify as necessary to match our table format
+import { dbConnection } from "../db-connect.js";
+
+// TODO make sure error messages are not too descriptive once we get this working
+
 export function registerAccount(req, res) {
-  const getUsersQuery = "SELECT * FROM users WHERE username = ?";
+  const getUsersQuery = "SELECT * FROM users WHERE id = ?";
 
   // perform query to see if user exists in database
-  dbConnection.query(getUsersQuery, TODO, (error, data) => {
+  dbConnection.query(getUsersQuery, [req.body.id], (error, data) => {
     // server error
     if (error) {
       return res.status(500).json(error);
@@ -31,7 +34,7 @@ export function registerAccount(req, res) {
       req.body.id,
       req.body.email,
       hashedPassword,
-      req.body.createdAt,
+      moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
     ];
 
     // perform query to add user to database
@@ -48,9 +51,10 @@ export function registerAccount(req, res) {
 }
 
 export function login(req, res) {
-  const q = "SELECT * FROM users WHERE username = ?";
+  const q = "SELECT * FROM users WHERE email = ?";
 
-  dbConnection.query(q, [req.body.username], (error, data) => {
+  // TODO let's maybe do this with a username instead
+  dbConnection.query(q, [req.body.email], (error, data) => {
     // server error
     if (error) {
       return res.status(500).json(error);
@@ -60,7 +64,6 @@ export function login(req, res) {
       return res.status(404).json("User not found!");
     }
 
-    // TODO figure out what this does
     const checkPassword = bcrypt.compareSync(
       req.body.password,
       data[0].password
@@ -68,7 +71,7 @@ export function login(req, res) {
 
     // invalid login credentials
     if (!checkPassword) {
-      return res.status(400).json("Wrong password or username!");
+      return res.status(400).json("Invalid username or password");
     }
 
     // create token for login session
@@ -77,7 +80,7 @@ export function login(req, res) {
     // use objecting desctructuring to remove password from values that will be returned
     const { password, ...others } = data[0];
 
-    // TODO figure out what this does
+    // TODO learn more about the specifics of this
     res
       .cookie("accessToken", token, {
         httpOnly: true, // TODO check if we want this
@@ -87,8 +90,8 @@ export function login(req, res) {
   });
 }
 
-export function logout() {
-  // TODO figure out what this does
+export function logout(req, res) {
+  // TODO learn more about the specifics of this
   res
     .clearCookie("accessToken", {
       secure: true,
