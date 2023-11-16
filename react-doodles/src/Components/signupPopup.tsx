@@ -12,15 +12,40 @@ function SignUpPopup({ onClose, onSignUp }: SignUpPopupProps) {
   const [reentry, setReEntry] = useState("");
   const [error, setError] = useState<string | null>(null);
 
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
     // login logic here and call onSignUp when successful.
-    console.log("Username: ", username);
-    console.log("Password: ", password);
-    console.log("Re-enter Password", reentry);
+    // console.log("Username: ", username);
+    // console.log("Password: ", password);
+    // console.log("Re-enter Password", reentry);
 
     if (password === reentry) {
-      onClose();
-      onSignUp();
+      try {
+        const res = await fetch("http://localhost:8800/api/auth/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          // TODO get rid of this random ID thing; for testing only!!!
+          body: `{"id": "${Math.floor(
+            Math.random() * 8543
+          ).toString()}", "email": "${username}", "password": "${password}"}`,
+        });
+
+        // check response
+        if (!res.ok) {
+          throw new Error(`HTTP error on register: ${res.status}`);
+        }
+
+        // get response data
+        const resData = await res.json();
+        // TODO probably need to do some more stuff here
+        console.log("Register response from server:", resData);
+
+        onClose();
+        onSignUp();
+      } catch (err) {
+        console.error("Error sending register request:", err);
+      }
     } else {
       setError("Passwords do not match, please re-enter");
     }
