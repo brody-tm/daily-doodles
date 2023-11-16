@@ -182,7 +182,7 @@ export const setName = (req, res) => {
         //Connect to database with statement and values
         dbConnection.query(q, values, (err, data) => {
             if (err) return res.status(500).json(err);
-            return res.status(200).json("Name has been changed.");
+            return res.status(200).json("Name has been changed to "+values[0]);
             });
     });
 };
