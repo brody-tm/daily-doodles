@@ -6,7 +6,7 @@ import Post from "../Components/Post";
 import styled from "styled-components";
 import samplePic1 from "../images/leaderboardPic1.png";
 import samplePic2 from "../images/leaderboardPic2.png";
-import samplePic3 from "../images/leaderboardPic2.png";
+import samplePic3 from "../images/leaderboardPic3.png";
 
 const AppContainer = styled.div`
   display: flex;
