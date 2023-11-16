@@ -4,6 +4,9 @@ import Heading from '../Components/Heading';
 import React, { useState } from 'react';
 import Post from '../Components/Post';
 import styled from 'styled-components';
+import samplePic1 from "../leaderboardPic1.png";
+import samplePic2 from "../leaderboardPic2.png";
+import samplePic3 from "../leaderboardPic2.png";
 
 
 const AppContainer = styled.div`
@@ -39,24 +42,24 @@ function ExplorerPage(){
           <>
             <Post
               username="User123"
-              userProfilePic="Logo.png"
-              imageSrc="leaderboardPic1.png"
+              userProfilePic="../Logo.png"
+              imageSrc={samplePic1}
               title="My Awesome Post"
               description="Check out my latest creation!"
             />
             <Post
               username="User456"
-              userProfilePic="Logo.png"
-              imageSrc="leaderboardPic2.png"
+              userProfilePic="../Logo.png"
+              imageSrc={samplePic2}
               title="Another Post"
               description="More amazing content!"
             />
             <Post
               username="User789"
-              userProfilePic="Logo.png"
-              imageSrc="leaderboardPic3.png"
+              userProfilePic="../Logo.png"
+              imageSrc={samplePic3}
               title="Great Post"
-              description="Don't miss it!"
+              description="My amazing art"
             />
            
           </>
@@ -66,24 +69,24 @@ function ExplorerPage(){
           <>
             <Post
               username="User456"
-              userProfilePic="Logo.png"
-              imageSrc="leaderboardPic2.png"
+              userProfilePic="../Logo.png"
+              imageSrc={samplePic3}
               title="Another Post"
-              description="More amazing content!"
+              description="My masterpiece"
             />
             <Post
               username="User789"
-              userProfilePic="Logo.png"
-              imageSrc="leaderboardPic3.png"
+              userProfilePic="../Logo.png"
+              imageSrc={samplePic2}
               title="Great Post"
-              description="Don't miss it!"
+              description="Harry potter"
             />
             <Post
               username="User123"
-              userProfilePic="Logo.png"
-              imageSrc="leaderboardPic1.png"
+              userProfilePic="../Logo.png"
+              imageSrc={samplePic1}
               title="My Awesome Post"
-              description="Check out my latest creation!"
+              description="Just a silly little guy"
             />
             {/* Add more global posts */}
          </>
