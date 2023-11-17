@@ -1,14 +1,13 @@
 import Express from "express";
-import { getPost, addPost, delPost } from "../controllers/post-control.js";
+import { getPosts, addPost, delPost } from "../controllers/post-control.js";
 
 const router = Express.Router();
 
-router.get("/", (req, res) => {
-  res.send("Responding to post related request.");
-});
+// routes: specifiy the action that will occur when a get, post, or delete
+// resuest is sent to /api/post/
 
-router.get("/get-post", getPost);
-router.post("/add-post", addPost);
-router.delete("/del-post", delPost);
+router.get("/", getPosts);
+router.post("/", addPost);
+router.delete("/:id", delPost);
 
 export default router;

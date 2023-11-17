@@ -2,100 +2,75 @@ import { dbConnection } from "../db-connect.js";
 import jwt from "jsonwebtoken";
 import moment from "moment";
 
-export const getPost = (req, res) => {
-  const q = "SELECT * FROM DailyDoodlesDB.posts WHERE 'id' = ?";
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//+++++++++++++++++++++++++++++++++GET POSTS+++++++++++++++++++++++++++++++++++
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-  dbConnection.query(q, [req.body.postId], (queryError, results) => {
-    if (queryError) {
-      console.error("Error executing the query:", queryError);
-      return;
-    }
-    console.log("Query results:", results);
-    res.send("Results in console");
+export const getPosts = (req, res) => {
+  const userId = req.query.userId;
+  const token = req.cookies.accessToken;
+  if (!token) return res.status(401).json("Not logged in!");
+
+  jwt.verify(token, "secretkey", (err, userInfo) => {
+    if (err) return res.status(403).json("Token is not valid!");
+
+    console.log(userId);
+
+    const q = "SELECT * FROM DailyDoodlesDB.posts";
+
+    dbConnection.query(q, (err, data) => {
+      if (err) return res.status(500).json(err);
+      return res.status(200).json(data);
+    });
   });
-
-  // const userId = req.query.userId;
-  // const token = req.cookies.accessToken;
-  // if (!token) return res.status(401).json("Not logged in!");
-  // jwt.verify(token, "secretkey", (err, userInfo) => {
-  //   if (err) return res.status(403).json("Token is not valid!");
-  //   console.log(userId);
-  //   const q =
-  //     userId !== "undefined"
-  //       ? `SELECT p.*, u.id AS userId, name, profilePic FROM posts AS p JOIN users AS u ON (u.id = p.userId) WHERE p.userId = ? ORDER BY p.createdAt DESC`
-  //       : `SELECT p.*, u.id AS userId, name, profilePic FROM posts AS p JOIN users AS u ON (u.id = p.userId)
-  //   LEFT JOIN relationships AS r ON (p.userId = r.followedUserId) WHERE r.followerUserId= ? OR p.userId =?
-  //   ORDER BY p.createdAt DESC`;
-  //   const values =
-  //     userId !== "undefined" ? [userId] : [userInfo.id, userInfo.id];
-  //   dbConnection.query(q, values, (err, data) => {
-  //     if (err) return res.status(500).json(err);
-  //     return res.status(200).json(data);
-  //   });
-  // });
 };
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//++++++++++++++++++++++++++++++++++ADD POST+++++++++++++++++++++++++++++++++++
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 export const addPost = (req, res) => {
-  const q =
-    "INSERT INTO DailyDoodlesDB.posts(`desc`, `body`, `user_id`, `created_at`) VALUES (?)";
+  const token = req.cookies.accessToken;
+  if (!token) return res.status(401).json("Not logged in!");
 
-  const values = [
-    req.body.desc,
-    req.body.body,
-    req.body.user_id,
-    moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
-  ];
+  jwt.verify(token, "secretkey", (err, userInfo) => {
+    if (err) return res.status(403).json("Token is not valid!");
 
-  dbConnection.query(q, [values], (err, data) => {
-    if (err) return res.status(500).json(err);
-    return res.status(200).json("Post has been created.");
+    const q =
+      "INSERT INTO DailyDoodlesDB.posts(`desc`, `body`, `user_id`, `created_at`) VALUES (?)";
+
+    const values = [
+      req.body.desc,
+      req.body.body,
+      req.body.user_id,
+      moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+    ];
+
+    dbConnection.query(q, [values], (err, data) => {
+      if (err) return res.status(500).json(err);
+      return res.status(200).json("Post has been created.");
+    });
   });
-
-  // const token = req.cookies.accessToken;
-  // if (!token) return res.status(401).json("Not logged in!");
-
-  // jwt.verify(token, "secretkey", (err, userInfo) => {
-  //   if (err) return res.status(403).json("Token is not valid!");
-
-  //   const q =
-  //     "INSERT INTO posts(`desc`, `img`, `createdAt`, `userId`) VALUES (?)";
-  //   const values = [
-  //     req.body.desc,
-  //     req.body.img,
-  //     moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
-  //     userInfo.id,
-  //   ];
-
-  //   dbConnection.query(q, [values], (err, data) => {
-  //     if (err) return res.status(500).json(err);
-  //     return res.status(200).json("Post has been created.");
-  //   });
-  // });
 };
 
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//++++++++++++++++++++++++++++++++++DEL POST+++++++++++++++++++++++++++++++++++
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 export const delPost = (req, res) => {
-  const q = "DELETE FROM posts WHERE `id`=? AND `user_id` = ?";
+  const token = req.cookies.accessToken;
+  if (!token) return res.status(401).json("Not logged in!");
 
-  dbConnection.query(q, [req.body.id, req.body.user_id], (err, data) => {
-    if (err) return res.status(500).json(err);
-    if (data.affectedRows > 0)
-      return res.status(200).json("Post has been deleted.");
-    return res.status(403).json("You can delete only your post");
+  jwt.verify(token, "secretkey", (err, userInfo) => {
+    if (err) return res.status(403).json("Token is not valid!");
+
+    const q = "DELETE FROM DailyDoodlesDB.posts WHERE `id`=? AND `user_id` = ?";
+
+    dbConnection.query(q, [req.params.id, userInfo.id], (err, data) => {
+      if (err) return res.status(500).json(err);
+      if (data.affectedRows > 0)
+        return res.status(200).json("Post has been deleted.");
+      return res.status(403).json("You can delete only your post");
+    });
   });
-
-  // const token = req.cookies.accessToken;
-  // if (!token) return res.status(401).json("Not logged in!");
-
-  // jwt.verify(token, "secretkey", (err, userInfo) => {
-  //   if (err) return res.status(403).json("Token is not valid!");
-
-  //   const q = "DELETE FROM posts WHERE `id`=? AND `userId` = ?";
-
-  //   dbConnection.query(q, [req.params.id, userInfo.id], (err, data) => {
-  //     if (err) return res.status(500).json(err);
-  //     if (data.affectedRows > 0)
-  //       return res.status(200).json("Post has been deleted.");
-  //     return res.status(403).json("You can delete only your post");
-  //   });
-  // });
 };
