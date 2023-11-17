@@ -15,7 +15,7 @@ function LoginPopup({ onClose, onLogin }: LoginPopupProps) {
     console.log("Username: ", username);
     console.log("Password: ", password);
 
-    // Close the login popup
+    onLogin();
     onClose();
   };
 

@@ -59,4 +59,9 @@
     margin-top: 10px;
     color:gray;
   }
+
+  .alert {
+    color: red;
+    margin: 3px;
+  }
   
