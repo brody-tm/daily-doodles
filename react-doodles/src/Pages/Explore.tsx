@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import { Container } from '@mui/material';
 import DisplayModeButtons from '../Components/DisplayModeButtons';
 import Heading from '../Components/Heading';
@@ -10,30 +10,20 @@ import samplePic2 from "../leaderboardPic2.png";
 import samplePic3 from "../leaderboardPic2.png";
 import "../Styles/Explorer.css";
 
-=======
-import { Container } from "@mui/material";
-import DisplayModeButtons from "../Components/DisplayModeButtons";
-import Heading from "../Components/Heading";
-import React, { useState } from "react";
-import Post from "../Components/Post";
-import styled from "styled-components";
-import samplePic1 from "../images/leaderboardPic1.png";
-import samplePic2 from "../images/leaderboardPic2.png";
-import samplePic3 from "../images/leaderboardPic3.png";
->>>>>>> f0b5320728a95815a50a818351491f6b583ee177
-
-const AppContainer = styled.div`
+//styles for conatiner 
+const AppContainer = styled.div`  
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 `;
-
+// the page to be exported
 function ExplorerPage() {
+  //sets opening to friends page
   const [displayMode, setDisplayMode] = useState("friends");
-
+//changes basd on whethr global or friends button is selected
   const handleDisplayModeChange = (mode: string) => {
     setDisplayMode(mode);
-    // You can add logic to fetch and display posts based on the selected mode
+    
   };
 
   return (
