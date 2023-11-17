@@ -1,6 +1,6 @@
 /**
  * Canvas.tsx
- * 
+ *
  * Handles the user drawing on the canvas
  * Defines the canvas area and functionality
  * Implements values from DrawingTools.tsx dynamically as the user changes them
@@ -36,7 +36,7 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
       if (context) {
         let lastX = 0;
         let lastY = 0;
-        //Captures state of canvas, pushes to stack 
+        //Captures state of canvas, pushes to stack
         const saveCanvasState = () => {
           const imageData = context.getImageData(
             0,
@@ -74,7 +74,7 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
           lastY = e.offsetY;
         };
 
-        //Ends drawing when mouse lifts, calls save state 
+        //Ends drawing when mouse lifts, calls save state
         const handleMouseUp = () => {
           isDrawing = false;
           saveCanvasState();
@@ -108,7 +108,7 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
     }
   };
 
-    //Handles undo button press, reverrts to previous version daved in canvas stack
+  //Handles undo button press, reverrts to previous version daved in canvas stack
   const handleUndo = () => {
     if (undoStack.length > 0) {
       const canvas = canvasRef.current;
@@ -129,6 +129,21 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
       }
     }
   };
+
+  //Handles save button press, saves canvas to computer as a png
+  const handleSaveCanvas = () => {
+    const canvas = canvasRef.current;
+    if (canvas) {
+      const dataUrl = canvas.toDataURL("image/png");
+      const a = document.createElement("a");
+      a.href = dataUrl;
+      a.download = "canvas_image.png";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+  };
+
   //HTML format of canvas on the page w/ drawing tools
   return (
     <div className="canvas-container">
@@ -142,6 +157,7 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
             onClearCanvas={handleClearCanvas}
             onUndo={handleUndo}
           />
+          <button onClick={handleSaveCanvas}>Save</button>
         </div>
         <div className="canvas-center">
           <canvas
