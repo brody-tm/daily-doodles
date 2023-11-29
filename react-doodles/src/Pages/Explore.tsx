@@ -5,9 +5,9 @@ import Heading from '../Components/Heading';
 import React, { useState } from 'react';
 import Post from '../Components/Post';
 import styled from 'styled-components';
-import samplePic1 from "../leaderboardPic1.png";
-import samplePic2 from "../leaderboardPic2.png";
-import samplePic3 from "../leaderboardPic2.png";
+import samplePic1 from "../images/leaderboardPic1.png";
+import samplePic2 from "../images/leaderboardPic2.png";
+import samplePic3 from "../images/leaderboardPic3.png";
 import "../Styles/Explorer.css";
 
 //styles for conatiner 
