@@ -1,13 +1,25 @@
+/**
+ * Canvas.tsx
+ *
+ * Handles the user drawing on the canvas
+ * Defines the canvas area and functionality
+ * Implements values from DrawingTools.tsx dynamically as the user changes them
+ * Styled by Canvas.css
+ */
+
 import React, { useEffect, useRef, useState } from "react";
 import DrawingTools from "./DrawingTools";
 import "../Styles/Canvas.css";
 
+//Properties of the canvas: height and width
 interface CanvasProps {
   width: number;
   height: number;
 }
 
+//Passes canvas props into the function
 const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
+  //Pulls values for line width, color, stack state, and drawing function
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [lineWidth, setLineWidth] = useState(5);
   const [color, setColor] = useState("#000");
@@ -17,13 +29,14 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    //Defines canvas properties
     if (canvas) {
       const context = canvas.getContext("2d");
 
       if (context) {
         let lastX = 0;
         let lastY = 0;
-
+        //Captures state of canvas, pushes to stack
         const saveCanvasState = () => {
           const imageData = context.getImageData(
             0,
@@ -34,22 +47,24 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
           setUndoStack((prevStack) => [...prevStack, imageData]);
         };
 
+        //Handles user interaction with canvas, mouse down = drawing
         const handleMouseDown = (e: MouseEvent) => {
           isDrawing = true;
           lastX = e.offsetX;
           lastY = e.offsetY;
-          saveCanvasState();
         };
 
+        //Tracks mouse on canvas, changing the pixel color in the radius of the line width
         const handleMouseMove = (e: MouseEvent) => {
           if (!isDrawing) return;
 
           if (!context) return;
 
+          //Line properties
           context.lineCap = "round";
           context.strokeStyle = color;
           context.lineWidth = lineWidth;
-
+          //Line path on canvas
           context.beginPath();
           context.moveTo(lastX, lastY);
           context.lineTo(e.offsetX, e.offsetY);
@@ -59,11 +74,12 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
           lastY = e.offsetY;
         };
 
+        //Ends drawing when mouse lifts, calls save state
         const handleMouseUp = () => {
           isDrawing = false;
           saveCanvasState();
         };
-
+        //Listeners for mouse controls
         canvas.addEventListener("mousedown", handleMouseDown);
         canvas.addEventListener("mousemove", handleMouseMove);
         canvas.addEventListener("mouseup", handleMouseUp);
@@ -77,14 +93,7 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
     }
   }, [width, height, lineWidth, color]);
 
-  const handleColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setColor(e.target.value);
-  };
-
-  const handleLineWidthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLineWidth(parseInt(e.target.value));
-  };
-
+  //Function to clear canvas on button press
   const handleClearCanvas = () => {
     const canvas = canvasRef.current;
     const context = canvas?.getContext("2d");
@@ -93,15 +102,13 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
       // Clear the canvas
       context.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Reset the undo stack
-      setUndoStack([]);
-
       // Save the cleared canvas state
       const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
       setDrawingState(imageData);
     }
   };
 
+  //Handles undo button press, reverrts to previous version daved in canvas stack
   const handleUndo = () => {
     if (undoStack.length > 0) {
       const canvas = canvasRef.current;
@@ -123,6 +130,21 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
     }
   };
 
+  //Handles save button press, saves canvas to computer as a png
+  const handleSaveCanvas = () => {
+    const canvas = canvasRef.current;
+    if (canvas) {
+      const dataUrl = canvas.toDataURL("image/png");
+      const a = document.createElement("a");
+      a.href = dataUrl;
+      a.download = "canvas_image.png";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+  };
+
+  //HTML format of canvas on the page w/ drawing tools
   return (
     <div className="canvas-container">
       <div className="canvas-and-tools">
@@ -135,6 +157,7 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
             onClearCanvas={handleClearCanvas}
             onUndo={handleUndo}
           />
+          <button onClick={handleSaveCanvas}>Save</button>
         </div>
         <div className="canvas-center">
           <canvas
