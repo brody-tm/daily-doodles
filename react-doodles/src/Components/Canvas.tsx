@@ -11,7 +11,7 @@ import React, { useEffect, useRef, useState } from "react";
 import DrawingTools from "./DrawingTools";
 import "../Styles/Canvas.css";
 import Caption from "../Components/Caption";
-import "../Styles/Caption.css";
+import "../Styles/Caption.css";;
 
 //Properties of the canvas: height and width
 interface CanvasProps {
@@ -149,17 +149,16 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
   const [userEnteredText, setUserEnteredText] = useState("");
   const handleCaptionTextChange = (text: string) => {
     setUserEnteredText(text);
-    console.log("User entered text:", text);
   };
 
   const getPost = () => {
     const postInfo = {
       desc: userEnteredText,
       body: "mypass",
-      user_id: "1234"
+      user_id: "1234",
     };
-  
-    fetch("/api/post", {
+
+    fetch("http://localhost:8800/api/post/", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
