@@ -10,7 +10,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import DrawingTools from "./DrawingTools";
 import "../Styles/Canvas.css";
-import Caption from "../Components/Caption"
+import Caption from "../Components/Caption";
+import "../Styles/Caption.css";
 
 //Properties of the canvas: height and width
 interface CanvasProps {
@@ -145,63 +146,67 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
     }
   };
 
-  const [userEnteredText, setUserEnteredText] = useState('');
+  const [userEnteredText, setUserEnteredText] = useState("");
   const handleCaptionTextChange = (text: string) => {
     setUserEnteredText(text);
-  }
+    console.log("User entered text:", text);
+  };
 
   const getPost = () => {
     const postInfo = {
       desc: userEnteredText,
       body: "mypass",
       user_id: "1234"
-    }
-
-    useEffect(() => {
-      fetch("/api/post/add-post", {
-        method: "POST",
-        headers: {
-          'Content-type': "application/json"
-        },
-        body: JSON.stringify(postInfo)
-      })
-      .then(res => res.json())
-      .then(data => console.log(data))
-    }, [])
-  }
+    };
+  
+    fetch("/api/post", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(postInfo),
+    })
+      .then((res) => res.text()) // Change to res.text() to log the entire response body
+      .then((text) => console.log("Response from server:", text))
+      .catch((error) => console.error("Error posting data:", error));
+  };
 
   //HTML format of canvas on the page w/ drawing tools
   return (
-    <div className="canvas-container">
-      <div className="canvas-and-tools">
-        <div className="drawing-tools">
-          <DrawingTools
-            lineWidth={lineWidth}
-            color={color}
-            onColorChange={setColor}
-            onLineWidthChange={setLineWidth}
-            onClearCanvas={handleClearCanvas}
-            onUndo={handleUndo}
-          />
-          <button onClick={handleSaveCanvas}>Save</button>
-          <button onClick={getPost}>Post!</button>
-        </div>
-        <div className="canvas-center">
-          <canvas
-            ref={canvasRef}
-            width={width}
-            height={height}
-            style={{
-              background: "white",
-              border: "10px solid black",
-              boxShadow: "5px 5px 10px rgba(0, 0, 0, 0.3)",
-              borderRadius: "5px",
-            }}
-          />
+    <>
+      <div className="canvas-container">
+        <div className="canvas-and-tools">
+          <div className="drawing-tools">
+            <DrawingTools
+              lineWidth={lineWidth}
+              color={color}
+              onColorChange={setColor}
+              onLineWidthChange={setLineWidth}
+              onClearCanvas={handleClearCanvas}
+              onUndo={handleUndo}
+            />
+            <button onClick={handleSaveCanvas}>Save</button>
+            <button onClick={getPost}>Post!</button>
+          </div>
+          <div className="canvas-center">
+            <canvas
+              ref={canvasRef}
+              width={width}
+              height={height}
+              style={{
+                background: "white",
+                border: "10px solid black",
+                boxShadow: "5px 5px 10px rgba(0, 0, 0, 0.3)",
+                borderRadius: "5px",
+              }}
+            />
+          </div>
         </div>
       </div>
-      <Caption text="Caption" onTextChange={handleCaptionTextChange}></Caption>
-    </div>
+      <div>
+        <Caption text="Caption" onTextChange={handleCaptionTextChange}></Caption>
+      </div>
+    </>
   );
 };
 
