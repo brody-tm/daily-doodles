@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Canvas from "../Components/Canvas";
 import Heading from "../Components/Heading";
 import Caption from "../Components/Caption";
@@ -19,6 +19,11 @@ const CanvasContainer = styled.div`
   margin-top: 10px;
 `;
 
+const [userEnteredText, setUserEnteredText] = useState('');
+const handleCaptionTextChange = (text: string) => {
+  setUserEnteredText(text);
+}
+
 const DrawingApp: React.FC = () => {
   return (
     <AppContainer>
@@ -35,7 +40,6 @@ const DrawingApp: React.FC = () => {
         >
          </div>
       </CanvasContainer>
-      <Caption text="Caption"></Caption>
     </AppContainer>
   );
 };

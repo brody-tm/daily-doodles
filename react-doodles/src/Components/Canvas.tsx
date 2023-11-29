@@ -10,6 +10,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import DrawingTools from "./DrawingTools";
 import "../Styles/Canvas.css";
+import Caption from "../Components/Caption"
 
 //Properties of the canvas: height and width
 interface CanvasProps {
@@ -144,6 +145,31 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
     }
   };
 
+  const [userEnteredText, setUserEnteredText] = useState('');
+  const handleCaptionTextChange = (text: string) => {
+    setUserEnteredText(text);
+  }
+
+  const getPost = () => {
+    const postInfo = {
+      desc: userEnteredText,
+      body: "mypass",
+      user_id: "1234"
+    }
+
+    useEffect(() => {
+      fetch("/api/post/add-post", {
+        method: "POST",
+        headers: {
+          'Content-type': "application/json"
+        },
+        body: JSON.stringify(postInfo)
+      })
+      .then(res => res.json())
+      .then(data => console.log(data))
+    }, [])
+  }
+
   //HTML format of canvas on the page w/ drawing tools
   return (
     <div className="canvas-container">
@@ -158,6 +184,7 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
             onUndo={handleUndo}
           />
           <button onClick={handleSaveCanvas}>Save</button>
+          <button onClick={getPost}>Post!</button>
         </div>
         <div className="canvas-center">
           <canvas
@@ -173,6 +200,7 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
           />
         </div>
       </div>
+      <Caption text="Caption" onTextChange={handleCaptionTextChange}></Caption>
     </div>
   );
 };
