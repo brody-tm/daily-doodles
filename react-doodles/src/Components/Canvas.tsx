@@ -10,7 +10,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import DrawingTools from "./DrawingTools";
 import "../Styles/Canvas.css";
-import Caption from "../Components/Caption"
+import Caption from "../Components/Caption";
 
 //Properties of the canvas: height and width
 interface CanvasProps {
@@ -145,30 +145,29 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
     }
   };
 
-  const [userEnteredText, setUserEnteredText] = useState('');
+  const [userEnteredText, setUserEnteredText] = useState("");
   const handleCaptionTextChange = (text: string) => {
     setUserEnteredText(text);
-  }
+  };
 
   const getPost = () => {
     const postInfo = {
       desc: userEnteredText,
       body: "mypass",
-      user_id: "1234"
-    }
+      user_id: "1234",
+    };
 
-    useEffect(() => {
-      fetch("/api/post/add-post", {
-        method: "POST",
-        headers: {
-          'Content-type': "application/json"
-        },
-        body: JSON.stringify(postInfo)
-      })
-      .then(res => res.json())
-      .then(data => console.log(data))
-    }, [])
-  }
+    fetch("http://localhost:8800/api/post/", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(postInfo),
+    })
+      .then((res) => res.text()) // Change to res.text() to log the entire response body
+      .then((text) => console.log("Response from server:", text))
+      .catch((error) => console.error("Error posting data:", error));
+  };
 
   //HTML format of canvas on the page w/ drawing tools
   return (
