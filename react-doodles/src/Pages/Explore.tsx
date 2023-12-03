@@ -1,17 +1,17 @@
-
-import { Container } from '@mui/material';
-import DisplayModeButtons from '../Components/DisplayModeButtons';
-import Heading from '../Components/Heading';
-import React, { useState } from 'react';
-import Post from '../Components/Post';
-import styled from 'styled-components';
+import { Container } from "@mui/material";
+import DisplayModeButtons from "../Components/DisplayModeButtons";
+import Heading from "../Components/Heading";
+import React, { useState } from "react";
+import Post from "../Components/Post";
+import Posts from "../Components/Posts";
+import styled from "styled-components";
 import samplePic1 from "../images/leaderboardPic1.png";
 import samplePic2 from "../images/leaderboardPic2.png";
 import samplePic3 from "../images/leaderboardPic3.png";
 import "../Styles/Explorer.css";
 
-//styles for conatiner 
-const AppContainer = styled.div`  
+//styles for conatiner
+const AppContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -20,14 +20,14 @@ const AppContainer = styled.div`
 function ExplorerPage() {
   //sets opening to friends page
   const [displayMode, setDisplayMode] = useState("friends");
-//changes basd on whethr global or friends button is selected
+  //changes basd on whethr global or friends button is selected
   const handleDisplayModeChange = (mode: string) => {
     setDisplayMode(mode);
-    
   };
 
   return (
     <>
+      <Posts />
       <div>
         <Heading text="Explore"></Heading>
 

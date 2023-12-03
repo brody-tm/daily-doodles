@@ -7,22 +7,29 @@ import moment from "moment";
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 export const getPosts = (req, res) => {
-  const userId = req.query.userId;
-  const token = req.cookies.accessToken;
-  if (!token) return res.status(401).json("Not logged in!");
+  // const userId = req.query.userId;
+  // const token = req.cookies.accessToken;
+  // if (!token) return res.status(401).json("Not logged in!");
 
-  jwt.verify(token, "secretkey", (err, userInfo) => {
-    if (err) return res.status(403).json("Token is not valid!");
+  // jwt.verify(token, "secretkey", (err, userInfo) => {
+  // if (err) return res.status(403).json("Token is not valid!");
 
-    console.log(userId);
+  // console.log(userId);
 
-    const q = "SELECT * FROM DailyDoodlesDB.posts";
+  const q = "SELECT * FROM DailyDoodlesDB.posts";
+  dbConnection.query(q, (err, data) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json(err);
+    }
 
-    dbConnection.query(q, (err, data) => {
-      if (err) return res.status(500).json(err);
-      return res.status(200).json(data);
-    });
+    // Ensuring data is an array
+    const dataArray = Array.isArray(data) ? data : [data];
+
+    return res.status(200).json(dataArray);
   });
+
+  // });
 };
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

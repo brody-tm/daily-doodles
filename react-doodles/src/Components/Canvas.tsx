@@ -11,7 +11,7 @@ import React, { useEffect, useRef, useState } from "react";
 import DrawingTools from "./DrawingTools";
 import "../Styles/Canvas.css";
 import Caption from "../Components/Caption";
-import "../Styles/Caption.css";;
+import "../Styles/Caption.css";
 
 //Properties of the canvas: height and width
 interface CanvasProps {
@@ -151,7 +151,7 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
     setUserEnteredText(text);
   };
 
-  const getPost = () => {
+  const addPost = () => {
     const postInfo = {
       desc: userEnteredText,
       body: "mypass",
@@ -185,7 +185,7 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
               onUndo={handleUndo}
             />
             <button onClick={handleSaveCanvas}>Save</button>
-            <button onClick={getPost}>Post!</button>
+            <button onClick={addPost}>Post!</button>
           </div>
           <div className="canvas-center">
             <canvas
@@ -203,7 +203,10 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
         </div>
       </div>
       <div>
-        <Caption text="Caption" onTextChange={handleCaptionTextChange}></Caption>
+        <Caption
+          text="Caption"
+          onTextChange={handleCaptionTextChange}
+        ></Caption>
       </div>
     </>
   );
