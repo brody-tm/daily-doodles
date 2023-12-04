@@ -80,10 +80,9 @@ export function login(req, res) {
     // use objecting desctructuring to remove password from values that will be returned
     const { password, ...others } = data[0];
 
-    // TODO learn more about the specifics of this
     res
       .cookie("accessToken", token, {
-        httpOnly: true, // TODO check if we want this
+        httpOnly: true,
       })
       .status(200)
       .json(others);
@@ -91,7 +90,6 @@ export function login(req, res) {
 }
 
 export function logout(req, res) {
-  // TODO learn more about the specifics of this
   res
     .clearCookie("accessToken", {
       secure: true,
