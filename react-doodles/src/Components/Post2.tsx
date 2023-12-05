@@ -1,7 +1,10 @@
+import jellyfish from "../../public/jellyfish.jpg";
+
 const Post2 = ({ post }) => (
   <div className="post">
     <h3>{post.desc}</h3>
-    <p>{post.body}</p>
+    <img src={post.body} alt="" />
+    {/* <img src={jellyfish} alt="" /> */}
     <p>
       <strong>User ID:</strong> {post.userId}
     </p>
