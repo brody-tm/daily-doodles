@@ -97,3 +97,29 @@ margin:0px;
 
 }
 
+#name{
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+#description{
+    font-size: large;
+}
+
+.spaced {
+    margin-bottom: 20px;
+  }
+
+  .profilebutton{
+background-color: black;
+color: white;
+border: black 3px solid;
+transition: 0.5s;
+  }
+
+  .profilebutton:hover{
+    background-color: white;
+    color:black;
+    border: black 3px solid;
+  }
+

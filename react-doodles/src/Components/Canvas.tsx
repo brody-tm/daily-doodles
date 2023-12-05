@@ -184,8 +184,8 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
               onClearCanvas={handleClearCanvas}
               onUndo={handleUndo}
             />
-            <button onClick={handleSaveCanvas}>Save</button>
-            <button onClick={addPost}>Post!</button>
+            <button className="drawingToolButton" onClick={handleSaveCanvas}>Save</button>
+            <button className="drawingToolButton" onClick={addPost}>Post!</button>
           </div>
           <div className="canvas-center">
             <canvas

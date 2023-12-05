@@ -39,7 +39,7 @@ const DrawingTools: React.FC<DrawingToolsProps> = ({
   return (
     //All tools in on container "tools-container"
     <div className="tools-container">
-      <div className="canvas-tools">
+      <div className="canvas-tools colorPick">
         {/**Color picker */}
         <label htmlFor="colorPicker">Choose Color: </label>
         <input
@@ -49,7 +49,7 @@ const DrawingTools: React.FC<DrawingToolsProps> = ({
           onChange={(e) => onColorChange(e.target.value)}
         />
       </div>
-      <div className="canvas-tools">
+      <div className="canvas-tools slider">
         {/**Line width slider */}
         <label htmlFor="lineWidthSlider">Line Width: </label>
         <input
@@ -64,8 +64,9 @@ const DrawingTools: React.FC<DrawingToolsProps> = ({
       </div>
       <div className="canvas-tools">
         {/**Buttons for undo and clear, dynamically updates on page */}
-        <button onClick={onUndo}>Undo</button>
-        <button onClick={onClearCanvas}>Clear</button>
+        <button className="drawingToolButton" onClick={onUndo}>Undo</button>
+        <button className="drawingToolButton" onClick={onClearCanvas}>Clear</button>
+        
       </div>
     </div>
   );

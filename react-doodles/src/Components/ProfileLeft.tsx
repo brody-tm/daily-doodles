@@ -6,16 +6,16 @@ function LeftSide() {
   return (
     <div className="column" id="column1">
       <ul className="leftgroup">
-        <li className="list-group-item">{name}</li>
-        <li className="list-group-item">{description}</li>
-        <li className="list-group-item">
+        <li className="list-group-item spaced" id="name">{name}</li>
+        <li className="list-group-item spaced" id="description">"{description}"</li>
+        <li className="list-group-item spaced">
           <Pallet></Pallet>
         </li>
-        <li className="list-group-item">
-          <button>Edit Profile</button>
+        <li className="list-group-item spaced">
+          <button className="profilebutton">Edit Profile</button>
         </li>
-        <li className="list-group-item">
-          <button onClick={handleLogout}>Sign Out</button>
+        <li className="list-group-item spaced">
+          <button onClick={handleLogout} className="profilebutton">Sign Out</button>
         </li>
       </ul>
     </div>
