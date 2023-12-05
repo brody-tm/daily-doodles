@@ -175,8 +175,9 @@ export const setProfile = (req, res) => {
         //SQL statement
         const q = 'UPDATE DailyDoodlesDB.profiles AS p SET profile_name= ?, bio=? WHERE p.id = ?;';
 
-        const values = ["Joeseph","His name is my name too",0];
+        const values = [req.body.profile_name,req.body.bio,req.params.id];
         // [,userId !== "undefined" ? [userId] : [userInfo.id, userInfo.id]];//ADD new Profile name first
+
 
         //Connect to database with statement and values
         dbConnection.query(q, values, (err, data) => {
