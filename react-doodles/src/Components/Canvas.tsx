@@ -12,6 +12,7 @@ import DrawingTools from "./DrawingTools";
 import "../Styles/Canvas.css";
 import Caption from "../Components/Caption";
 import "../Styles/Caption.css";
+import CaptionPopup from "./CaptionPopup";
 
 //Properties of the canvas: height and width
 interface CanvasProps {
@@ -27,6 +28,8 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
   const [color, setColor] = useState("#000");
   const [undoStack, setUndoStack] = useState<ImageData[]>([]);
   const [drawingState, setDrawingState] = useState<ImageData | null>(null);
+  const [showCaptionPopup, setShowCaptionPopup] = useState(false);
+  const [userEnteredText, setUserEnteredText] = useState("");
   let isDrawing = false;
 
   useEffect(() => {
@@ -146,12 +149,12 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
     }
   };
 
-  const [userEnteredText, setUserEnteredText] = useState("");
-  const handleCaptionTextChange = (text: string) => {
-    setUserEnteredText(text);
-  };
+  const handlePostClick = () => {
+    setShowCaptionPopup(true);
+  }
 
   const addPost = () => {
+    setShowCaptionPopup(true);
     const postInfo = {
       desc: userEnteredText,
       body: "mypass", //TODO - NEED TO SAVE DRAWING TO /public  WHEN POST IS CLICKED AND SET body TO THE IMAGES PATH
@@ -170,7 +173,20 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
       .catch((error) => console.error("Error posting data:", error));
   };
 
-  //HTML format of canvas on the page w/ drawing tools
+  const handleCaptionSubmit = (caption: string) => {
+    // Save the entered caption
+    setUserEnteredText(caption);
+
+    // You can send the caption to the backend or perform any other action
+    console.log("Caption submitted:", caption);
+
+    // Add the post logic here or call the existing addPost function
+    addPost();
+
+    // Close the caption popup
+    setShowCaptionPopup(false);
+  };
+
   return (
     <>
       <div className="canvas-container">
@@ -184,8 +200,8 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
               onClearCanvas={handleClearCanvas}
               onUndo={handleUndo}
             />
-            <button className="drawingToolButton" onClick={handleSaveCanvas}>Save</button>
-            <button className="drawingToolButton" onClick={addPost}>Post!</button>
+            <button onClick={handleSaveCanvas}>Save</button>
+            <button onClick={handlePostClick}>Post!</button>
           </div>
           <div className="canvas-center">
             <canvas
@@ -202,12 +218,12 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
           </div>
         </div>
       </div>
-      <div>
-        <Caption
-          text="Caption"
-          onTextChange={handleCaptionTextChange}
-        ></Caption>
-      </div>
+      {showCaptionPopup && (
+        <CaptionPopup
+          onClose={() => setShowCaptionPopup(false)}
+          onCaptionSubmit={handleCaptionSubmit}
+        />
+      )}
     </>
   );
 };
