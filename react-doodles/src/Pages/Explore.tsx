@@ -10,8 +10,8 @@ import samplePic2 from "../images/leaderboardPic2.png";
 import samplePic3 from "../images/leaderboardPic3.png";
 import "../Styles/Explorer.css";
 
-//styles for conatiner
-const AppContainer = styled.div`
+//styles for conatiner 
+const AppContainer = styled.div`  
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -23,6 +23,7 @@ function ExplorerPage() {
   //changes basd on whethr global or friends button is selected
   const handleDisplayModeChange = (mode: string) => {
     setDisplayMode(mode);
+    
   };
 
   return (
