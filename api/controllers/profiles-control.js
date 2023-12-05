@@ -163,6 +163,34 @@ export const getFollows = (req, res) => {
 //++++++++++++++++++++++++++++++++++++++++++++  SETTERS  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //======================================================================================================================
 
+export const setProfile = (req, res) => {
+    const userId = req.query.userId;
+    const token = req.cookies.accessToken;
+    
+    // if (!token) return res.status(401).json("Not logged in!");//Checks to see if user is logged in
+
+    jwt.verify(token, "secretkey", (err, userInfo) => {
+        // if(err) return res.status(403).json("Token is not valid!");//Checks to see if user has correct information
+        
+        //SQL statement
+        const q = 'UPDATE DailyDoodlesDB.profiles AS p SET profile_name= ?, bio=? WHERE p.id = ?;';
+
+        const values = [req.body.profile_name,req.body.bio,req.params.id];
+        // [,userId !== "undefined" ? [userId] : [userInfo.id, userInfo.id]];//ADD new Profile name first
+
+
+        //Connect to database with statement and values
+        dbConnection.query(q, values, (err, data) => {
+            if (err) return res.status(500).json(err);
+            return res.status(200).json("Profile has been changed.");
+            });
+    });
+};
+
+
+
+
+
 /*Gets userID from token and uses it to change profile name in database*/
 export const setName = (req, res) => {
     const userId = req.query.userId;

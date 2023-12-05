@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { AuthContext } from "../context/authContext";
 import "../Styles/loginPopup.css";
 
 interface LoginPopupProps {
@@ -7,15 +10,15 @@ interface LoginPopupProps {
 }
 
 function LoginPopup({ onClose, onLogin }: LoginPopupProps) {
-  // TODO probably make this a json object rather than a couple of strings
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const { isAuthed, setAuthed } = useContext(AuthContext);
 
-  // might want to make the requests using this instead
+  // TODO might want to use a JSON object instead make the requests using this instead
   // const [loginData, updateLoginData] = useState({
   //   email: "",
   //   password: "",
   // });
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
     // login logic here and call onLogin when successful.
@@ -42,6 +45,8 @@ function LoginPopup({ onClose, onLogin }: LoginPopupProps) {
       const resData = await res.json();
       // TODO make this do something with the cookie instead
       console.log("Login response from server:", resData);
+      
+      setAuthed(true);
 
       onLogin();
       onClose();

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../Styles/Login.css";
 import Title from "../title.png";
@@ -28,6 +28,7 @@ function LoginPage() {
     setLoginPopupVisible(false);
   };
 
+  // TODO move login logic to login.tsx (if there's time)
   const handleLogin = () => {
     // login logic here
     closeLoginPopup();

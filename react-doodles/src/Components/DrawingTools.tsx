@@ -1,23 +1,24 @@
-/** DrawingTools.tsx
- * Contains functionality and format for the color picker,
+/**
+ * @file DrawingTools.tsx
+ * @description Contains functionality and format for the color picker,
  * line width slider, undo button, and clear button
- * 
  * Styled from Canvas.css
- * 
- * 
  */
 
 import React from "react";
 import "../Styles/Canvas.css";
 
 /**
- * Dynamic properties for all tools
- * lineWidth: read from slider, controls line width
- * color: hexcode value, selected from color picker, changes line color
- * onColorChange: listens for color changes
- * onLineWidthChange: listens for slider change
- * onClearCanvas: listens for clear button press
- * onUndo: listens for undo button press 
+ * @interface DrawingToolsProps
+ * @description Dynamic properties for all tools
+ * @property {number} lineWidth - Controls line width, read from slider
+ * @property {string} color - Hexcode value selected from color picker, changes line color
+ * @property {(color: string) => void} onColorChange - Listens for color changes
+ * @property {(width: number) => void} onLineWidthChange - Listens for slider change
+ * @property {() => void} onClearCanvas - Listens for clear button press
+ * @property {() => void} onUndo - Listens for undo button press
+ * @property {() => void} onSaveCanvas - Listens for save button press
+ * @property {() => void} onPostClick - Listens for post button press
  */
 interface DrawingToolsProps {
   lineWidth: number;
@@ -26,8 +27,17 @@ interface DrawingToolsProps {
   onLineWidthChange: (width: number) => void;
   onClearCanvas: () => void;
   onUndo: () => void;
+  onSaveCanvas: () => void;
+  onPostClick: () => void;
 }
 
+/**
+ * @function DrawingTools
+ * @description Functional component for drawing tools including color picker,
+ * line width slider, undo button, clear button, save button, and post button.
+ * @param {DrawingToolsProps} props - Drawing tools properties
+ * @returns {JSX.Element} JSX element representing the drawing tools
+ */
 const DrawingTools: React.FC<DrawingToolsProps> = ({
   lineWidth,
   color,
@@ -35,12 +45,14 @@ const DrawingTools: React.FC<DrawingToolsProps> = ({
   onLineWidthChange,
   onClearCanvas,
   onUndo,
+  onSaveCanvas,
+  onPostClick
 }) => {
   return (
-    //All tools in on container "tools-container"
+    // All tools in one container "tools-container"
     <div className="tools-container">
-      <div className="canvas-tools">
-        {/**Color picker */}
+      <div className="canvas-tools colorPick">
+        {/* Color picker */}
         <label htmlFor="colorPicker">Choose Color: </label>
         <input
           type="color"
@@ -49,8 +61,8 @@ const DrawingTools: React.FC<DrawingToolsProps> = ({
           onChange={(e) => onColorChange(e.target.value)}
         />
       </div>
-      <div className="canvas-tools">
-        {/**Line width slider */}
+      <div className="canvas-tools slider">
+        {/* Line width slider */}
         <label htmlFor="lineWidthSlider">Line Width: </label>
         <input
           type="range"
@@ -63,9 +75,11 @@ const DrawingTools: React.FC<DrawingToolsProps> = ({
         <span>{lineWidth}</span>
       </div>
       <div className="canvas-tools">
-        {/**Buttons for undo and clear, dynamically updates on page */}
-        <button onClick={onUndo}>Undo</button>
-        <button onClick={onClearCanvas}>Clear</button>
+        {/* Buttons for undo, clear, save, and post */}
+        <button className="drawingToolButton" onClick={onUndo}>Undo</button>
+        <button className="drawingToolButton" onClick={onClearCanvas}>Clear</button>
+        <button className="drawingToolButton" onClick={onSaveCanvas}>Save</button>
+        <button className="drawingToolButton" onClick={onPostClick}>Post!</button>
       </div>
     </div>
   );
