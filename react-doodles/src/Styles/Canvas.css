@@ -101,16 +101,9 @@ gap: 10px;
 
 }
 
-.tools-container{
-  gap: 20px;
-}
 
-.drawing-tools{
-  border: solid black 3px;
-  border-radius: 15px;
-margin-bottom: 15px;
-padding: 5px 15px 5px 15px;
-}
+
+
 
 .drawingToolButton {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
@@ -149,4 +142,20 @@ padding: 5px 15px 5px 15px;
 .canvas-tools.slider span {
   margin-top: 5px; 
   font-weight: bold; 
+}
+
+.canvas-and-tools{
+  display: flex;
+  align-items: center;
+}
+
+.tools-container{
+  display: block;
+}
+
+.drawing-tools{
+  height: fit-content;
+  border: solid black 3px;
+  border-radius: 15px;
+padding: 5px 15px 5px 15px;
 }

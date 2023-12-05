@@ -1,6 +1,7 @@
 import React from "react";
 import Canvas from "../Components/Canvas";
 import Heading from "../Components/Heading";
+import Prompts from "../Components/Prompts";
 import styled from "styled-components";
 
 const AppContainer = styled.div`
@@ -23,6 +24,7 @@ const DrawingApp: React.FC = () => {
   return (
     <AppContainer>
       <Heading text="DOODLE" />
+      <Prompts />
       <CanvasContainer>
         <Canvas width={800} height={600} />
         <div
