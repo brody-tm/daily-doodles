@@ -157,8 +157,8 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
     setShowCaptionPopup(true);
     const postInfo = {
       desc: userEnteredText,
-      body: "mypass",
-      user_id: "1234",
+      body: "mypass", //TODO - NEED TO SAVE DRAWING TO /public  WHEN POST IS CLICKED AND SET body TO THE IMAGES PATH
+      user_id: "1234", //TODO - Should be the user's ID
     };
 
     fetch("http://localhost:8800/api/post/", {

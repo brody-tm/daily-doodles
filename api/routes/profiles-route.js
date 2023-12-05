@@ -1,5 +1,5 @@
 import express from "express";
-import { setPic, getName, getPic, getProfile, setName, setBio, setLikes, setFollows, getBio, getLikes, getFollows } from "../controllers/profiles-control.js";
+import { setPic, getName, getPic, getProfile, setName, setBio, setLikes, setFollows, getBio, getLikes, getFollows, setProfile } from "../controllers/profiles-control.js";
 
 const router = express.Router();
 
@@ -14,7 +14,7 @@ router.get("/get-bio", getBio);
 router.get("/get-likes", getLikes);
 router.get("/get-follows", getFollows);
 
-
+router.put("/change-profile", setProfile);
 router.put("/change-name", setName);
 router.put("/change-pic", setPic);
 router.put("/change-bio", setBio);
