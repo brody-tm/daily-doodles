@@ -1,6 +1,5 @@
 // import axios from "axios";
 import { ReactNode, createContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 type Props = {
   children?: ReactNode;
@@ -20,8 +19,6 @@ const AuthContext = createContext<IAuthContext>(initAuthValue);
 
 const AuthContextProvider = ({ children }: Props) => {
   const [isAuthed, setAuthed] = useState(initAuthValue.isAuthed);
-
-  const navigate = useNavigate();
 
   return (
     <AuthContext.Provider value={{ isAuthed, setAuthed }}>
