@@ -26,6 +26,8 @@ interface DrawingToolsProps {
   onLineWidthChange: (width: number) => void;
   onClearCanvas: () => void;
   onUndo: () => void;
+  onSaveCanvas: () => void;
+  onPostClick: () => void;
 }
 
 const DrawingTools: React.FC<DrawingToolsProps> = ({
@@ -35,6 +37,8 @@ const DrawingTools: React.FC<DrawingToolsProps> = ({
   onLineWidthChange,
   onClearCanvas,
   onUndo,
+  onSaveCanvas,
+  onPostClick
 }) => {
   return (
     //All tools in on container "tools-container"
@@ -66,6 +70,8 @@ const DrawingTools: React.FC<DrawingToolsProps> = ({
         {/**Buttons for undo and clear, dynamically updates on page */}
         <button className="drawingToolButton" onClick={onUndo}>Undo</button>
         <button className="drawingToolButton" onClick={onClearCanvas}>Clear</button>
+        <button className="drawingToolButton" onClick={onSaveCanvas}>Save</button>
+        <button className="drawingToolButton" onClick={onPostClick}>Post!</button>
         
       </div>
     </div>

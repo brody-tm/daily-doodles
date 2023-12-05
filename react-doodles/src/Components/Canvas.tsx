@@ -151,7 +151,7 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
 
   const handlePostClick = () => {
     setShowCaptionPopup(true);
-  }
+  };
 
   const addPost = () => {
     setShowCaptionPopup(true);
@@ -199,9 +199,9 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
               onLineWidthChange={setLineWidth}
               onClearCanvas={handleClearCanvas}
               onUndo={handleUndo}
+              onSaveCanvas={handleSaveCanvas}
+              onPostClick={handlePostClick}
             />
-            <button onClick={handleSaveCanvas}>Save</button>
-            <button onClick={handlePostClick}>Post!</button>
           </div>
           <div className="canvas-center">
             <canvas
