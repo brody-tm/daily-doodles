@@ -5,3 +5,6 @@
 ##### Then do this every day!
 ####
 ### Visit the website here:
+####
+## Screenshots:
+![doodle](https://github.com/WVU-CS230-2023-08-Group02/Daily-Doodles/assets/142516804/effaeec9-fd40-4528-b4db-eac96d836170)
