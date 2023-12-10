@@ -13,7 +13,7 @@
     border-radius: 50px;
     height: 90px;
     width: 300px;
-    font: 20pt "Cooper Black";
+    font: 20pt "Cooper Black", serif;
     color:black;
     box-shadow: 4px 4px black;
     margin-top: 200px;
@@ -32,7 +32,7 @@
 }
 
 .guest{
-    font: 14pt "Cooper Black";
+    font: 14pt "Cooper Black", serif;
     margin-top: 400px;
     color: black;
     display: flex;

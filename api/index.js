@@ -6,14 +6,19 @@ import profileRoutes from "./routes/profiles-route.js";
 
 import Express from "express";
 const app = Express();
+app.disable("x-powered-by"); // don't expose the framework being used
 
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
 // middleware
 app.use(Express.json());
-app.use(cors());
 app.use(cookieParser());
+
+// let corsOptions = {
+//   origin: "trustedwebsite.com", // stricter CORS policy, for security
+// };
+app.use(cors());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/post", postRoutes);
