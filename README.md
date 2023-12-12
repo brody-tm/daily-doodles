@@ -5,8 +5,18 @@ Then do this every day!
 ### Visit the website here:
 ## Screenshots:
 
-##Installation
+## Installation
 * Open a terminal in react-doodles and run: npm i
-.* This should install all of the necessary frontend files
+ * This should install all of the necessary frontend files
 * Open a terminal in api and run: npm i
-.* This should install all of the necessary backend files
+ * This should install all of the necessary backend files
+
+## Framework
+* React
+* MySQL
+
+## Testing
+* Recursive testing completed with [Selenium](https://www.selenium.dev/)
+* Security and code style testing completed with [SonarQube](https://www.sonarqube.org/)
+
+
