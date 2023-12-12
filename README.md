@@ -4,3 +4,9 @@ Draw pictures in a full range of colors, add a caption, and upload your image fo
 Then do this every day!
 ### Visit the website here:
 ## Screenshots:
+
+##Installation
+* Open a terminal in react-doodles and run: npm i
+.* This should install all of the necessary frontend files
+* Open a terminal in api and run: npm i
+.* This should install all of the necessary backend files
