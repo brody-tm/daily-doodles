@@ -1,7 +1,5 @@
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-
-import { AuthContext } from "../context/authContext";
+import { UserContext } from "../context/userContext";
 import "../Styles/loginPopup.css";
 
 interface LoginPopupProps {
@@ -10,48 +8,30 @@ interface LoginPopupProps {
 }
 
 function LoginPopup({ onClose, onLogin }: LoginPopupProps) {
-  const { isAuthed, setAuthed } = useContext(AuthContext);
-
-  // TODO might want to use a JSON object instead make the requests using this instead
-  // const [loginData, updateLoginData] = useState({
-  //   email: "",
-  //   password: "",
-  // });
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const { login } = useContext(UserContext);
 
   const handleLogin = async () => {
-    // login logic here and call onLogin when successful.
-    // console.log("Username: ", username);
-    // console.log("Password: ", password);
+    setError(null);
+    const loginStatus = await login(username, password);
 
-    // attempt to send the request
-    try {
-      // might be better to make a function for this?
-      const res = await fetch("http://localhost:8800/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: `{"email": "${username}", "password": "${password}"}`,
-      });
-
-      // check response
-      if (!res.ok) {
-        throw new Error(`HTTP error on login: ${res.status}`);
-      }
-
-      // get response data (including the cookie)
-      const resData = await res.json();
-      // TODO make this do something with the cookie instead
-      console.log("Login response from server:", resData);
-      
-      setAuthed(true);
-
+    // user not found
+    if (loginStatus === 404) {
+      setError("User not found");
+    }
+    // incorrect username or password
+    else if (loginStatus === 400) {
+      setError("Incorrect username or password");
+    }
+    // unknown error
+    else if (loginStatus === -1) {
+      setError("Unkown error");
+    } else {
+      // succesful login; navigate user to the home page
       onLogin();
       onClose();
-    } catch (err) {
-      console.error("Error sending login request:", err);
     }
   };
 
@@ -74,6 +54,13 @@ function LoginPopup({ onClose, onLogin }: LoginPopupProps) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        {/* Display error message if there is an error */}
+        {error && (
+          <div className="alert" role="alert">
+            {error}
+          </div>
+        )}
+        {/* Login button */}
         <button onClick={handleLogin}>Login</button>
         <a href="" className="forgot_password">
           forgot your password?

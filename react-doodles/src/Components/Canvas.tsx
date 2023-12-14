@@ -1,47 +1,78 @@
 /**
- * Canvas.tsx
+ * @file Canvas.tsx
  *
- * Handles the user drawing on the canvas
+ * @description Handles the user drawing on the canvas
  * Defines the canvas area and functionality
  * Implements values from DrawingTools.tsx dynamically as the user changes them
  * Styled by Canvas.css
  */
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import DrawingTools from "./DrawingTools";
 import "../Styles/Canvas.css";
-import Caption from "../Components/Caption";
 import "../Styles/Caption.css";
 import CaptionPopup from "./CaptionPopup";
+import { UserContext } from "../context/userContext";
 
-//Properties of the canvas: height and width
+/**
+ * Properties of the canvas
+ */
 interface CanvasProps {
+  /** Width of the canvas */
   width: number;
+  /** Height of the canvas */
   height: number;
 }
-
-//Passes canvas props into the function
+/**
+ * Canvas component for drawing on an HTML canvas.
+ *
+ * @param width - the width of the canvas
+ * @param height - the height of the canvas
+ *
+ * @returns New Canvas object with the specified width and height
+ */
 const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
-  //Pulls values for line width, color, stack state, and drawing function
+  // Pulls values for line width, color, stack state, and drawing function
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [lineWidth, setLineWidth] = useState(5);
   const [color, setColor] = useState("#000");
   const [undoStack, setUndoStack] = useState<ImageData[]>([]);
   const [drawingState, setDrawingState] = useState<ImageData | null>(null);
   const [showCaptionPopup, setShowCaptionPopup] = useState(false);
-  const [userEnteredText, setUserEnteredText] = useState("");
+  const { currentUser } = useContext(UserContext);
+  const [ImageURL, setImageURL] = useState("");
   let isDrawing = false;
+  let userEnteredText = "";
+  let ImgUrl = "";
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    //Defines canvas properties
+
+    // Set initial white background when component is mounted
+    if (canvas) {
+      const context = canvas.getContext("2d");
+
+      if (context) {
+        context.fillStyle = "#FFFFFF";
+        context.fillRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+
+    // Defines canvas properties
     if (canvas) {
       const context = canvas.getContext("2d");
 
       if (context) {
         let lastX = 0;
         let lastY = 0;
-        //Captures state of canvas, pushes to stack
+
+        /**
+         * Captures the state of the canvas and pushes it to the stack.
+         */
         const saveCanvasState = () => {
           const imageData = context.getImageData(
             0,
@@ -52,39 +83,53 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
           setUndoStack((prevStack) => [...prevStack, imageData]);
         };
 
-        //Handles user interaction with canvas, mouse down = drawing
+        /**
+         * Handles user interaction with canvas, mouse down = drawing
+         *
+         * @param e - The MouseEvent used to detect clicks
+         */
         const handleMouseDown = (e: MouseEvent) => {
           isDrawing = true;
           lastX = e.offsetX;
           lastY = e.offsetY;
         };
 
-        //Tracks mouse on canvas, changing the pixel color in the radius of the line width
+        /**
+         * Tracks mouse on canvas, changing the pixel color in the radius of the line width
+         *
+         * @param e - The MouseEvent used for tracking mouse movement
+         */
         const handleMouseMove = (e: MouseEvent) => {
           if (!isDrawing) return;
 
-          if (!context) return;
+          const context = canvas?.getContext("2d");
 
-          //Line properties
-          context.lineCap = "round";
-          context.strokeStyle = color;
-          context.lineWidth = lineWidth;
-          //Line path on canvas
-          context.beginPath();
-          context.moveTo(lastX, lastY);
-          context.lineTo(e.offsetX, e.offsetY);
-          context.stroke();
+          if (context) {
+            // Move these outside of the context checks
+            context.lineCap = "round";
+            context.strokeStyle = color;
+            context.lineWidth = lineWidth;
 
-          lastX = e.offsetX;
-          lastY = e.offsetY;
+            // Line path on canvas
+            context.beginPath();
+            context.moveTo(lastX, lastY);
+            context.lineTo(e.offsetX, e.offsetY);
+            context.stroke();
+
+            lastX = e.offsetX;
+            lastY = e.offsetY;
+          }
         };
 
-        //Ends drawing when mouse lifts, calls save state
+        /**
+         * Ends drawing when mouse lifts, calls saveCanvasState()
+         */
         const handleMouseUp = () => {
           isDrawing = false;
           saveCanvasState();
         };
-        //Listeners for mouse controls
+
+        // Listeners for mouse controls
         canvas.addEventListener("mousedown", handleMouseDown);
         canvas.addEventListener("mousemove", handleMouseMove);
         canvas.addEventListener("mouseup", handleMouseUp);
@@ -96,9 +141,11 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
         };
       }
     }
-  }, [width, height, lineWidth, color]);
+  });
 
-  //Function to clear canvas on button press
+  /**
+   * Clears the canvas and sets the drawing state to an empty canvas.
+   */
   const handleClearCanvas = () => {
     const canvas = canvasRef.current;
     const context = canvas?.getContext("2d");
@@ -106,6 +153,8 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
     if (canvas && context) {
       // Clear the canvas
       context.clearRect(0, 0, canvas.width, canvas.height);
+      context.fillStyle = "#FFFFFF";
+      context.fillRect(0, 0, canvas.width, canvas.height);
 
       // Save the cleared canvas state
       const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
@@ -113,7 +162,9 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
     }
   };
 
-  //Handles undo button press, reverrts to previous version daved in canvas stack
+  /**
+   * Undoes the last drawing action by reverting to the previous canvas state.
+   */
   const handleUndo = () => {
     if (undoStack.length > 0) {
       const canvas = canvasRef.current;
@@ -135,7 +186,9 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
     }
   };
 
-  //Handles save button press, saves canvas to computer as a png
+  /**
+   * Saves the canvas as an image and triggers a download.
+   */
   const handleSaveCanvas = () => {
     const canvas = canvasRef.current;
     if (canvas) {
@@ -149,33 +202,83 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
     }
   };
 
-  const handlePostClick = () => {
-    setShowCaptionPopup(true);
+  /**
+   * Prepares the canvas image for posting, showing a caption popup.
+   */
+  const handlePostImage = async () => {
+    try {
+      setShowCaptionPopup(true);
+      if (canvasRef.current) {
+        setImageURL(canvasRef.current.toDataURL("image/jpeg", 0.8));
+      }
+    } catch (error) {
+      console.error("Error saving image:", error);
+    }
   };
 
+  const handleProfileImage = async () => {
+    if (canvasRef.current) {
+      ImgUrl = canvasRef.current.toDataURL("image/jpeg", 0.8);
+      SetProfileData();
+    }
+  };
+  const SetProfileData = async () => {
+    // attempt to send the request
+    try {
+      const res = await fetch("http://localhost:8800/api/profile/pic", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: `{"id": ${currentUser?.id}, "profile_image": "${ImgUrl}"}`,
+      });
+
+      console.log(res);
+      // check response
+      if (!res.ok) {
+        throw new Error(`HTTP error on login: ${res.status}`);
+      }
+    } catch (err) {
+      console.error("Error sending login request:", err);
+    }
+  };
+
+  /**
+   * Adds a post to the server with the entered caption and canvas image.
+   */
   const addPost = () => {
     setShowCaptionPopup(true);
-    const postInfo = {
-      desc: userEnteredText,
-      body: "mypass", //TODO - NEED TO SAVE DRAWING TO /public  WHEN POST IS CLICKED AND SET body TO THE IMAGES PATH
-      user_id: "1234", //TODO - Should be the user's ID
-    };
 
-    fetch("http://localhost:8800/api/post/", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(postInfo),
-    })
-      .then((res) => res.text()) // Change to res.text() to log the entire response body
-      .then((text) => console.log("Response from server:", text))
-      .catch((error) => console.error("Error posting data:", error));
+    if (canvasRef.current) {
+      const postInfo = {
+        desc: userEnteredText,
+        body: ImageURL, //TODO
+        user_id: currentUser!.id.toString(), //TODO - Should be the user's ID
+      };
+
+      fetch("http://localhost:8800/api/post/", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(postInfo),
+        credentials: "include",
+      })
+        .then((res) => res.text())
+        .then((text) => console.log("Response from server:", text))
+        .catch((error) => console.error("Error posting data:", error));
+    }
   };
 
+  /**
+   * Handles the submission of the entered caption.
+   * Saves the caption, adds the post, and closes the caption popup.
+   *
+   * @param {string} caption - The entered caption.
+   */
   const handleCaptionSubmit = (caption: string) => {
     // Save the entered caption
-    setUserEnteredText(caption);
+    userEnteredText = caption;
 
     // You can send the caption to the backend or perform any other action
     console.log("Caption submitted:", caption);
@@ -192,6 +295,7 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
       <div className="canvas-container">
         <div className="canvas-and-tools">
           <div className="drawing-tools">
+            {/* DrawingTools component for setting line width, color, and other options */}
             <DrawingTools
               lineWidth={lineWidth}
               color={color}
@@ -200,10 +304,12 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
               onClearCanvas={handleClearCanvas}
               onUndo={handleUndo}
               onSaveCanvas={handleSaveCanvas}
-              onPostClick={handlePostClick}
+              onPostClick={handlePostImage}
+              onProfilePic={handleProfileImage}
             />
           </div>
           <div className="canvas-center">
+            {/* Canvas element for drawing */}
             <canvas
               ref={canvasRef}
               width={width}
@@ -218,6 +324,7 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
           </div>
         </div>
       </div>
+      {/* CaptionPopup component for entering and submitting captions */}
       {showCaptionPopup && (
         <CaptionPopup
           onClose={() => setShowCaptionPopup(false)}

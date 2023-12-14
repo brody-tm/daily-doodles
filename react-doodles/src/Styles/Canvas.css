@@ -1,161 +1,201 @@
-/* DrawingTools.css */
-/* Peter Sorrentino*/
+/* Canvas.css */
 
+/* Styles for the container of drawing tools */
 .drawing-tools {
-    display: flex;  /*Aligns dynamically*/
-    flex-direction: row; /* Display tools in one row */
-    align-items: center; /* Center tools vertically */
-    margin-right: 20px;
-  }
-  
+  display: flex; /* Aligns dynamically */
+  flex-direction: row; /* Display tools in one row */
+  align-items: center; /* Center tools vertically */
+  margin-right: 20px;
+}
 
-  /*Button and slider styling*/
-  .drawing-tools button,
-  .drawing-tools input[type="range"],
-  .drawing-tools select {
-  
-    padding: 5px 10px;
-    font-family: 'Comic Sans MS', cursive;
-    cursor: pointer;
-    margin: 5px;
-    
-  }
-  
-  /*Hover over characteristics*/
- 
-  
-  /*Slider Specific styling*/
-  .drawing-tools input[type="range"] {
-    appearance: none;
-    height: 10px;
-    border-radius: 10px;
-    background: #000000;
-    outline: none;
-    width: 180px;
-    transition: background 0.3s ease-in-out;
-    border: 3px solid black;
-    align-items: center;
-  }
-  
-  /*Slider knob styling*/
-  .drawing-tools input[type="range"]::-webkit-slider-thumb {
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    background: #838181;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background 0.3s ease-in-out;
-    margin-right: 5px;
-    align-items: center;
-  }
-  
-  .drawing-tools input[type="range"]:hover {
-    background: #b4b3b3;
-    border: 3px solid black;
-    align-items: center;
-  }
-  
-  .drawing-tools input[type="range"]:hover::-webkit-slider-thumb {
-    background: #08090a;
-    border: 3px solid black;
-    align-items: center;
-  }
-  
-  .drawing-tools button:first-child {
-    margin-left: 0; 
-    margin-right: 5px; 
-  }
-  
-  .drawing-tools button:last-child {
-    margin-right: 0; 
-  }
-  .tools-container {
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    text-align: center;
-  }
-  
-  .canvas-tools {
-    margin: 0 10px;
-    font-family: 'YourBubbleFont', sans-serif;
-  }
-  
+/* Button and slider styling for drawing tools */
+.drawing-tools button,
+.drawing-tools input[type="range"],
+.drawing-tools select {
+  padding: 5px 10px;
+  font-family: "Comic Sans MS", cursive;
+  cursor: pointer;
+  margin: 5px;
+}
 
+/* Hover over characteristics for buttons and sliders */
+
+/* Styling for sliders in drawing tools */
+.drawing-tools input[type="range"] {
+  appearance: none;
+  height: 10px;
+  border-radius: 10px;
+  background: #000000;
+  outline: none;
+  width: 180px;
+  transition: background 0.3s ease-in-out;
+  border: 3px solid black;
+  align-items: center;
+}
+
+/* Styling for the knobs and sliders in drawing tools */
+.drawing-tools input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #838181;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  margin-right: 5px;
+  align-items: center;
+}
+
+/* Hover effects for sliders in drawing tools */
+.drawing-tools input[type="range"]:hover {
+  background: #b4b3b3;
+  border: 3px solid black;
+  align-items: center;
+}
+
+.drawing-tools input[type="range"]:hover::-webkit-slider-thumb {
+  background: #08090a;
+  border: 3px solid black;
+  align-items: center;
+}
+
+/* Margin adjustments for the first and last child buttons */
+.drawing-tools button:first-child {
+  margin-left: 0;
+  margin-right: 5px;
+}
+
+.drawing-tools button:last-child {
+  margin-right: 0;
+}
+
+/* Styles for the container of tools */
+.tools-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Styles for canvas tools */
+.canvas-tools {
+  margin: 0 10px;
+  font-family: "YourBubbleFont", sans-serif;
+}
+
+/* Styling for the color picker */
 #colorPicker {
   border: none;
   outline: none;
   appearance: none;
   -webkit-appearance: none;
-  padding: 0; 
-  width: 50px; 
+  padding: 0;
+  width: 50px;
   height: 50px;
-  border-radius: 15px !important; }
-
-.canvas-tools.colorPick{
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 10px;
-
+  border-radius: 15px !important;
 }
 
+/* Styles for the color pick container */
+.canvas-tools.colorPick {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
 
-
-
-
+/* Styles for drawing tool buttons */
 .drawingToolButton {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  background-color: black;
   width: 80px;
   height: 40px;
   border: black solid 3px;
   transition: 0.75s;
 }
 
-.drawingToolButton:hover {
-  background-color: rgb(255, 255, 255); 
-  border: black solid 3px;
-  color:black;
+.drawingToolButton.first {
+  background-color: #8f030b;
 }
 
-.canvas-container{
+.drawingToolButton.two {
+  background-color: #672d57;
+}
+.drawingToolButton.three {
+  background-color: #1c6468;
+  width: fit-content;
+  height: fit-content;
+}
+
+.drawingToolButton:hover {
+  background-color: rgb(255, 255, 255);
+  border: black solid 3px;
+  color: black;
+}
+
+/* Styles for the canvas container */
+.canvas-container {
   text-align: center;
 }
 
-.canvas-tools.slider{
+/* Styles for slider in canvas tools */
+.canvas-tools.slider {
   align-items: center;
   justify-content: center;
   text-align: center;
 }
-  
-
-
 
 .canvas-tools.slider input[type="range"] {
-  width: 80%; 
-  margin: 0 auto; 
+  width: 80%;
+  margin: 0 auto;
   display: block;
 }
 
 .canvas-tools.slider span {
-  margin-top: 5px; 
-  font-weight: bold; 
+  margin-top: 5px;
+  font-weight: bold;
 }
 
-.canvas-and-tools{
+/* Styles for the combination of canvas and tools */
+.canvas-and-tools {
   display: flex;
   align-items: center;
+  margin-right: 50%;
 }
 
-.tools-container{
+/* Styles for the tools container */
+.tools-container {
   display: block;
 }
 
-.drawing-tools{
+/* Additional styling for drawing tools container */
+.drawing-tools {
   height: fit-content;
   border: solid black 3px;
   border-radius: 15px;
-padding: 5px 15px 5px 15px;
+  padding: 5px 15px 5px 15px;
+  width: 121px;
+}
+
+/* Style for the container that holds the canvas component */
+.canvas-container {
+  display: block;
+  margin-right: 15%;
+}
+
+/* Styles for prompt text */
+.prompt {
+  font-size: 40px;
+}
+
+.promptBox {
+  text-align: center;
+}
+
+/* Style for the prompt clock */
+.clock {
+  font-size: 25px;
+}
+
+.manual-line-width{
+  width: 30px;
+  margin-left: 30%;
 }

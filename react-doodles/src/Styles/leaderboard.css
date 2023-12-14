@@ -1,7 +1,19 @@
 .leaderboardbutton{
     height: 75px;
 }
-
+.Post2{
+    &:nth-child(1) {
+        border-color: #cd7f32; /* Bronze color */
+      }
+    
+      &:nth-child(2) {
+        border-color: #C0C0C0; /* Silver color */
+      }
+    
+      &:nth-child(3) {
+        border-color: #FFD700; /* Gold color */
+      }
+}
 .title{
     margin-top: 30px;
     font-size: 50px;
@@ -15,10 +27,7 @@
     justify-content: center;
 }
 
-.friendSide,.globalSide{
-    margin-top: 20px;
-    font-size: 20px;
-}
+
 
 .PostsContainer{
     display:flex;

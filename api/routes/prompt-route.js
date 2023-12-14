@@ -1,9 +1,8 @@
 import express from "express";
+import { getPrompt } from "../controllers/prompt-control.js";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.send("Responding to like related request.");
-});
+router.get("/", getPrompt);
 
 export default router;

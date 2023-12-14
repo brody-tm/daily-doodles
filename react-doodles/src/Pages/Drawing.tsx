@@ -19,11 +19,10 @@ const CanvasContainer = styled.div`
   margin-top: 10px;
 `;
 
-
 const DrawingApp: React.FC = () => {
   return (
     <AppContainer>
-      <Heading text="DOODLE" />
+      <Heading text="Doodle" />
       <Prompts />
       <CanvasContainer>
         <Canvas width={800} height={600} />
@@ -34,8 +33,7 @@ const DrawingApp: React.FC = () => {
             alignItems: "center",
             marginTop: "10px",
           }}
-        >
-         </div>
+        ></div>
       </CanvasContainer>
     </AppContainer>
   );

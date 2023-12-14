@@ -19,6 +19,7 @@ import "../Styles/Canvas.css";
  * @property {() => void} onUndo - Listens for undo button press
  * @property {() => void} onSaveCanvas - Listens for save button press
  * @property {() => void} onPostClick - Listens for post button press
+ * @property {() => void} onProfilePic
  */
 interface DrawingToolsProps {
   lineWidth: number;
@@ -29,6 +30,7 @@ interface DrawingToolsProps {
   onUndo: () => void;
   onSaveCanvas: () => void;
   onPostClick: () => void;
+  onProfilePic: ()=> void;
 }
 
 /**
@@ -46,8 +48,14 @@ const DrawingTools: React.FC<DrawingToolsProps> = ({
   onClearCanvas,
   onUndo,
   onSaveCanvas,
-  onPostClick
+  onPostClick,
+  onProfilePic
 }) => {
+  const handleLineWidthInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newLineWidth = parseInt(e.target.value);
+    onLineWidthChange(newLineWidth);
+  };
+
   return (
     // All tools in one container "tools-container"
     <div className="tools-container">
@@ -72,17 +80,30 @@ const DrawingTools: React.FC<DrawingToolsProps> = ({
           value={lineWidth}
           onChange={(e) => onLineWidthChange(parseInt(e.target.value))}
         />
-        <span>{lineWidth}</span>
+      </div>
+      <div className="canvas-tools">
+        {/* Line width input field */}
+        <input
+          type="number"
+          id="lineWidthInput"
+          min="1"
+          max="60"
+          value={lineWidth}
+          onChange={handleLineWidthInputChange}
+          style={{width: "30px", height: "8px"}}
+        />
       </div>
       <div className="canvas-tools">
         {/* Buttons for undo, clear, save, and post */}
-        <button className="drawingToolButton" onClick={onUndo}>Undo</button>
-        <button className="drawingToolButton" onClick={onClearCanvas}>Clear</button>
-        <button className="drawingToolButton" onClick={onSaveCanvas}>Save</button>
-        <button className="drawingToolButton" onClick={onPostClick}>Post!</button>
+        <button className="drawingToolButton first" onClick={onUndo}>Undo</button>
+        <button className="drawingToolButton first" onClick={onClearCanvas}>Clear</button>
+        <button className="drawingToolButton two" onClick={onSaveCanvas}>Save</button>
+        <button className="drawingToolButton two" onClick={onPostClick}>Post!</button>
+        <button className="drawingToolButton three" onClick={onProfilePic}>Change Profile Pic</button>
       </div>
     </div>
   );
 };
 
 export default DrawingTools;
+

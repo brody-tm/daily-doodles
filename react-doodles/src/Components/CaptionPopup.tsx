@@ -1,41 +1,46 @@
-
 /**
- * @file CaptionPopup.tsx
- * @description React component for a caption popup used for submitting post captions.
- * Styled from loginPopup.css
+ * @file Canvas.tsx
+ *
+ * @description Defines a popup window component that is used for submitting drawings as posts
  */
 
 import React, { useState } from "react";
 import "../Styles/loginPopup.css";
 
 /**
- * @interface CaptionPopupProps
- * @description Properties for the CaptionPopup component.
- * @property {() => void} onClose - Function to close the caption popup.
- * @property {(caption: string) => void} onCaptionSubmit - Function to submit the caption for a post.
+ * Props for interfacing with a CaptionPopup component
  */
 interface CaptionPopupProps {
+  /**
+   * Callback function invoked when popup is closed
+   */
   onClose: () => void;
+  /**
+   * Callback function that is invoked when popup's submit button is pressed
+   */
   onCaptionSubmit: (caption: string) => void;
 }
 
 /**
- * @function CaptionPopup
- * @description Functional component for a caption popup.
- * @param {CaptionPopupProps} props - Properties for the CaptionPopup component.
- * @returns {JSX.Element} JSX element representing the caption popup.
+ * Creates a popup window used for submitting a post with a caption
+ *
+ * @param onClose - function that will define the behavior of the popup when closed
+ * @param onCaptionSubmit - function that will define the behavior of the popup when the submit button is hit
+ *
+ * @returns A new rendered caption popup window component
  */
 function CaptionPopup({ onClose, onCaptionSubmit }: CaptionPopupProps) {
   const [caption, setCaption] = useState("");
 
-  /**
-   * @function handleCaptionSubmit
-   * @description Handles the submission of the caption.
-   * Calls the onCaptionSubmit callback with the current caption and closes the popup.
-   */
   const handleCaptionSubmit = () => {
     onCaptionSubmit(caption);
     onClose();
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Limit the input to 30 characters
+    const inputValue = e.target.value.slice(0, 30);
+    setCaption(inputValue);
   };
 
   return (
@@ -49,7 +54,7 @@ function CaptionPopup({ onClose, onCaptionSubmit }: CaptionPopupProps) {
           type="text"
           placeholder="Title/Caption your post here!"
           value={caption}
-          onChange={(e) => setCaption(e.target.value)}
+          onChange={handleInputChange}
         />
         <button onClick={handleCaptionSubmit}>Submit Caption</button>
       </div>

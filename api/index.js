@@ -1,8 +1,7 @@
 import authRoutes from "./routes/auth-route.js";
 import postRoutes from "./routes/posts-route.js";
-import likeRoutes from "./routes/likes-route.js";
-import commentRoutes from "./routes/comments-route.js";
 import profileRoutes from "./routes/profiles-route.js";
+import promptRoutes from "./routes/prompt-route.js";
 
 import Express from "express";
 const app = Express();
@@ -12,19 +11,22 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 
 // middleware
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Credentials", true);
+  next();
+});
 app.use(Express.json());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
 app.use(cookieParser());
-
-// let corsOptions = {
-//   origin: "trustedwebsite.com", // stricter CORS policy, for security
-// };
-app.use(cors());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/post", postRoutes);
-app.use("/api/like", likeRoutes);
-app.use("/api/comment", commentRoutes);
 app.use("/api/profile", profileRoutes);
+app.use("/api/prompt", promptRoutes);
 
 app.get("/", (req, res) => {
   res.send("Responding to request for main page.");

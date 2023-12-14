@@ -1,5 +1,11 @@
 import Express from "express";
-import { getPosts, addPost, delPost } from "../controllers/post-control.js";
+import {
+  getPosts,
+  addPost,
+  delPost,
+  likePost,
+  getTopPosts,
+} from "../controllers/post-control.js";
 
 const router = Express.Router();
 
@@ -7,7 +13,9 @@ const router = Express.Router();
 // resuest is sent to /api/post/
 
 router.get("/", getPosts);
+router.get("/top", getTopPosts);
 router.post("/", addPost);
 router.delete("/:id", delPost);
+router.put("/like/:id", likePost);
 
 export default router;

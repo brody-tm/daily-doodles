@@ -1,67 +1,115 @@
+/**
+ * @file auth-control.js
+ *
+ * @description Controller that handles user account creation and authentication
+ */
+
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import moment from "moment";
 
 import { dbConnection } from "../db-connect.js";
 
-// TODO make sure error messages are not too descriptive once we get this working
-
+/**
+ * Handles the registration of a new user account.
+ *
+ * @param req - Express request object.
+ * @param res - Express response object.
+ *
+ * @returns Response with the status code of the request
+ */
 export function registerAccount(req, res) {
-  const getUsersQuery = "SELECT * FROM users WHERE id = ?";
+  // SQL query to check if the user already exists
+  const getUsersQuery = "SELECT * FROM users WHERE email = ?";
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%&]).*$/;
 
-  // perform query to see if user exists in database
-  dbConnection.query(getUsersQuery, [req.body.id], (error, data) => {
-    // server error
+  // Perform query to see if the user exists in the database
+  dbConnection.query(getUsersQuery, [req.body.email], (error, data) => {
+    // Server error
     if (error) {
       return res.status(500).json(error);
     }
 
-    // user already exists in database
+    // User already exists in the database
     if (data.length) {
       return res.status(409).json("User already exists!");
     }
 
-    // if we get here, create new user
+    // Check for the correct email and password formats
+    if (!emailRegex.test(req.body.email)) {
+      return res.status(400).json({ error: "Invalid email format" });
+    }
 
-    //Hash the password
+    if (!passwordRegex.test(req.body.password)) {
+      return res.status(400).json({ error: "Invalid password format" });
+    }
+
+    // If we get here, create a new user
+
+    // Hash the password
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(req.body.password, salt);
 
     const addUserQuery =
-      "INSERT INTO users (`id`,`email`,`password`,`created_at`) VALUE (?)";
+      "INSERT INTO users (`email`,`password`,`created_at`) VALUE (?)";
 
     const userData = [
-      req.body.id,
       req.body.email,
       hashedPassword,
       moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
     ];
 
-    // perform query to add user to database
+    // Perform query to add the user to the database
     dbConnection.query(addUserQuery, [userData], (error, data) => {
-      // server error
+      // Server error
       if (error) {
-        return res.status(500).json(error);
+        return res.status(300).json(error);
       }
 
-      // successfully created user
-      return res.status(200).json("User has been created.");
+      // Get the new user's information
+      const getNewUserQuery = "SELECT * FROM users WHERE email = ? ";
+
+      dbConnection.query(getNewUserQuery, [req.body.email], (error, data) => {
+        const newUserID = data[0].id;
+        const addProfileQuery =
+          "INSERT INTO profiles (`id`,`profile_name`,`bio`,`likes`,`follows`) VALUE (?);";
+
+        const ProfileData = [newUserID, req.body.email, "Add Bio Below", 0, 0];
+
+        // Create an empty profile
+        dbConnection.query(addProfileQuery, [ProfileData], (error, data) => {
+          // Server error
+          if (error) {
+            return res.status(500).json(error);
+          }
+          // Successfully created the user
+          return res.status(200).json("User has been created.");
+        });
+      });
     });
   });
 }
 
+/**
+ * Handles user login process by issuing an authentication cookie
+ *
+ * @param req - Express request object.
+ * @param res - Express response object.
+ *
+ * @returns Response with the status code of the request
+ */
 export function login(req, res) {
   const q = "SELECT * FROM users WHERE email = ?";
 
-  // TODO let's maybe do this with a username instead
   dbConnection.query(q, [req.body.email], (error, data) => {
-    // server error
+    // Server error
     if (error) {
       return res.status(500).json(error);
     }
-    // user does not exist in database
+    // User does not exist in the database
     if (data.length === 0) {
-      return res.status(404).json("User not found!");
+      return res.status(404).json("User not found");
     }
 
     const checkPassword = bcrypt.compareSync(
@@ -69,15 +117,15 @@ export function login(req, res) {
       data[0].password
     );
 
-    // invalid login credentials
+    // Invalid login credentials
     if (!checkPassword) {
-      return res.status(400).json("Invalid username or password");
+      return res.status(400).json("Wrong username or password");
     }
 
-    // create token for login session
-    const token = jwt.sign({ id: data[0].id }, "secretkey");
+    // Create a token for the login session
+    const token = jwt.sign({ id: data[0].id }, "secretkey"); // TODO: Make the secret key actually secret...
 
-    // use objecting desctructuring to remove password from values that will be returned
+    // Use object destructuring to remove the password from values that will be returned
     const { password, ...others } = data[0];
 
     res
@@ -89,11 +137,19 @@ export function login(req, res) {
   });
 }
 
+/**
+ * Logs user out by clearing the authentication cookies
+ *
+ * @param req - Express request object.
+ * @param res - Express response object.
+ *
+ * @returns Response with the status code of the request
+ */
 export function logout(req, res) {
   res
     .clearCookie("accessToken", {
       secure: true,
-      sameSite: "none",
+      sameSite: "None",
     })
     .status(200)
     .json("User has been logged out.");

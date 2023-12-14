@@ -1,113 +1,94 @@
-/**THIS IS FOR STYLE ONLY! NOT FUNCTIONAL WITH BACKEND 
- * FOR DEMONSTRATION PURPOSE ONLY */
+/**
+ * @module Post - represents a single post
+ * @param post
+ */
 
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import { useState, useContext } from "react";
+import { Post } from "./Posts.tsx";
+import { UserContext } from "../context/userContext.tsx";
 
-const PostContainer = styled.div`
-  width: 400px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 16px;
-  margin: 16px;
-  background: white;
-  text-align: left;
-  height: 600px
-  display: flex;
-  flex-direction: column;
-`;
+const Post2 = ({ post }: { post: Post }) => {
+  //Remove
+  const [likes, setLikes] = useState(post.likes);
+  const [isLiked, setIsLiked] = useState(false);
+  const { currentUser } = useContext(UserContext);
 
-const UserContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 8px;
-`;
-
-const UserProfilePic = styled.img`
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 12px;
-`;
-
-const UserName = styled.div`
-  font-weight: bold;
-  font-size: 16px;
-`;
-
-const PostImageContainer = styled.div`
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  overflow: hidden;
-  margin-bottom: 16px;
-`;
-
-const PostImage = styled.img`
-  width: 100%;
-  max-height: 400px;
-  object-fit: cover;
-  border-radius: 8px;
-`;
-
-const Caption = styled.div`
-  background: lightgray;
-  padding: 8px;
-  border-radius: 8px;
-  margin-top: auto; 
-`;
-
-const Title = styled.div`
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 8px;
-`;
-
-const Description = styled.div`
-  font-size: 16px;
-  margin-bottom: 8px;
-`;
-
-const LikeButton = styled.button`
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 20px;
-`;
-
-
-const Post: React.FC<{
-  username: string;
-  userProfilePic: string;
-  imageSrc: string;
-  title: string;
-  description: string;
-  style?: React.CSSProperties;
-}> = ({ username, userProfilePic, imageSrc, title, description, style }) => {
-  const [likes, setLikes] = useState(0);
+  //Sends PUT request to update a post's likes
+  const updateLike = async () => {
+    fetch("http://localhost:8800/api/post/like/${post.id}", {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ likes: likes, id: post.id }),
+    })
+      .then((res) => res.text()) // Change to res.text() to log the entire response body
+      .then((text) => console.log("Response from server:", text))
+      .catch((error) => console.error("Error liking post:", error));
+  };
 
   const handleLike = () => {
-    setLikes(likes + 1);
+    if (!isLiked) {
+      setLikes(likes + 1);
+      setIsLiked(!isLiked);
+      updateLike();
+      return;
+    } else {
+      setLikes(likes - 1);
+      setIsLiked(!isLiked);
+      return;
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      console.log("POST ID: " + post.id);
+      await fetch("http://localhost:8800/api/post/${post.id}", {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ id: post.id }),
+        credentials: "include",
+      });
+
+      window.location.reload(); // refresh page to show updated posts
+    } catch (err: any) {
+      console.log("Error when deleting post: " + err);
+    }
+  };
+
+  const PostDeleteBtn = () => {
+    if (currentUser!.id === post.userId) {
+      return <button className="deleteButton" onClick={handleDelete}>🗑️</button>;
+    }
   };
 
   return (
-    <PostContainer style={style}> 
-      <UserContainer>
-        <UserProfilePic src={userProfilePic} alt={`${username}'s Profile Pic`} />
-        <UserName>{username}</UserName>
-      </UserContainer>
-      <PostImageContainer>
-        <PostImage src={imageSrc} alt={`${title} Image`} />
-      </PostImageContainer>
-      <Caption>
-        <Title>{title}</Title>
-        <Description>{description}</Description>
-        <div>
-          <LikeButton onClick={handleLike}>❤️</LikeButton> {likes} likes
+    <div className="post-container">
+      <div className="post">
+        <img className="pic" src={post.body} alt="" />
+        <div className="lowerHalf">
+          <div className="Caption">
+            <strong className="userName ">User {post.userId}:  </strong> {post.desc}
+          </div>
+
+          <span
+            className="likebtn"
+            onClick={handleLike}
+            style={{ cursor: "pointer" }}
+          >
+            {isLiked ? "❤️" : "🤍"}
+            <div className="likeFont">{likes}</div>
+          </span>
+          <div className="lowerBoxTime">
+            <div className="time">{new Date(post.createdAt).toLocaleString()}</div>
+            <PostDeleteBtn />
+          </div>
         </div>
-      </Caption>
-    </PostContainer>
+      </div>
+    </div>
   );
 };
 
-export default Post;
+export default Post2;

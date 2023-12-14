@@ -1,4 +1,3 @@
-//import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./Components/Navbar.tsx";
 import Drawing from "./Pages/Drawing.tsx";
@@ -6,10 +5,10 @@ import Profile from "./Pages/Profile.tsx";
 import Explorer from "./Pages/Explore.tsx";
 import LeaderboardApp from "./Pages/Leaderboard.tsx";
 import LoginPage from "./Pages/Login.tsx";
-import { AuthContext } from "./context/authContext.tsx";
 import { useContext } from "react";
+import { UserContext } from "./context/userContext.tsx";
 
-function App() {
+const App = () => {
   return (
     <BrowserRouter>
       <Routes>
@@ -18,13 +17,13 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
-}
+};
 
 function AuthenticatedApp() {
-  const { isAuthed } = useContext(AuthContext);
+  const { currentUser } = useContext(UserContext);
 
   // user is not logged in
-  if (!isAuthed) {
+  if (currentUser === null) {
     // TODO remove this message
     console.log("Tried to access a protected route without logging in");
     return <Navigate to="/" replace />;

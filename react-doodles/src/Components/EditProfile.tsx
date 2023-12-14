@@ -1,26 +1,29 @@
 import "../Styles/loginPopup.css";
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../context/userContext";
+
 
 
 interface EditPopupProps {
     onClose: () => void; // Define the type for onClose
-    
 }
 
 function EditProfilePopup({ onClose}: EditPopupProps) {
     const [profileName, setName] = useState("");
     const [profileBio, setBio] = useState("");
+    const { currentUser} = useContext(UserContext);
+
 
     const SetProfileData = async () => {
         // attempt to send the request
         try {
-          const res = await fetch("http://localhost:8800/api/profile/change-profile", {
+          const res = await fetch("http://localhost:8800/api/profile/edit", {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
             },
             //TODO Alter ID LATER
-            body: `{"id": 0, "profile_name": "${profileName}", "bio": "${profileBio}"}`,
+            body: `{"id": ${currentUser?.id}, "profile_name": "${profileName}", "bio": "${profileBio}"}`,
 
           });
     

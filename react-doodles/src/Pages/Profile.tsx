@@ -1,8 +1,8 @@
 import Heading from "../Components/Heading";
 import LeftSide from "../Components/ProfileLeft"
 import "../Styles/profile.css";
-import MyGallary from "../Components/profileGallary"
-import Awards from "../Components/profileAwards"
+import MyGallery from "../Components/ProfileGallery"
+
 function Profile() {
   return( 
     <div>
@@ -10,8 +10,7 @@ function Profile() {
     <div className ="outside">
     <div className='containerprofile'>
    <LeftSide></LeftSide>
-    <MyGallary></MyGallary>
-    <Awards></Awards>
+    <MyGallery></MyGallery>
     </div>
   </div>
   </div>
