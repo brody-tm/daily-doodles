@@ -3,8 +3,7 @@
 Draw pictures in a full range of colors, add a caption, and upload your image for the world to see!\
 Then do this every day! Most liked doodles of the day are displayed on our leaderbord!
 ### Visit the site here:
-### Build Version
-=====
+### Build Version:
 Alpha version 0.2.14
 ## Screenshots:
 ### Logo
@@ -15,9 +14,9 @@ Alpha version 0.2.14
 ![alt text](SSofProfile.png "Profile Page")
 ## Installation
 * Open a terminal in react-doodles and run: npm i
- * This should install all of the necessary frontend files
+  * This should install all of the necessary frontend files
 * Open a terminal in api and run: npm i
- * This should install all of the necessary backend files
+  * This should install all of the necessary backend files
 
 ## Framework
 * React
