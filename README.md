@@ -2,7 +2,10 @@
 ### DailyDoodles is a drawing-based social media app where users are given daily prompts to doodle and share with other users!
 Draw pictures in a full range of colors, add a caption, and upload your image for the world to see!\
 Then do this every day! Most liked doodles of the day are displayed on our leaderbord!
-### Visit the website here:
+### Visit the site here:
+### Build Version
+=====
+Alpha version 0.2.14
 ## Screenshots:
 ### Logo
 ![alt text](Logo.png "DD Logo")
@@ -28,5 +31,7 @@ Then do this every day! Most liked doodles of the day are displayed on our leade
 * Saved friends list
 * Minigame modes such as Speed Drawing and Pictionary
 * More profile customization
+* Sorting through posts by different metrics
+* Tagging friends onto post
 
 
