@@ -11,7 +11,9 @@ Alpha version 0.2.14
 ### Leaderboard
 ![alt text](SSofLeaderboard.png "Leaderboard Page")
 ### Profile Page
-![alt text](SSofProfile.png "Profile Page")
+![alt text](profileSS.png "Profile Page")
+### Explore Page
+![alt text](SSofExplore.png "Explore Page")
 ## Installation
 * Open a terminal in react-doodles and run: npm i
   * This should install all of the necessary frontend files
