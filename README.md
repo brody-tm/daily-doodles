@@ -15,19 +15,19 @@ Alpha version 0.2.14
 
 ### Logo
 
-![DailyDoodles logo](logo.png "DD Logo")
+![DailyDoodles logo](readme-imgs/logo.png "DD Logo")
 
 ### Leaderboard
 
-![DD leaderboard page](pic-leaderboard.png "Leaderboard Page")
+![DD leaderboard page](readme-imgs/pic-leaderboard.png "Leaderboard Page")
 
 ### Profile Page
 
-![DD profile page](pic-profile.png "Profile Page")
+![DD profile page](readme-imgs/pic-profile.png "Profile Page")
 
 ### Explore Page
 
-![DD explore page](pic-explore.png "Explore Page")
+![DD explore page](readme-imgs/pic-explore.png "Explore Page")
 
 ## Installation (Windows)
 
